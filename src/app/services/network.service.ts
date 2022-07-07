@@ -1,30 +1,73 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { StatesService } from '../services/states';
 @Injectable({
   providedIn: 'root'
 })
 export class NetworkService {
+
+  customerProfile: any;
+
+
   private inquiryData:any;
   private inquiryJson:any;
-  private inquiryCount:any;
+  private inquiryCount:number=0;
 
   private saleorderData:any;
   private saleorderJson:any;
-  private saleorderCount:any;
+  private saleorderCount:number=0;
 
   private deliveryData:any;
   private deliveryJson:any;
-  private deliveryCount:any;
+  private deliveryCount:number=0;
   private deliveryArray:any=[];
 
 
   public isLoading:boolean = false;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private states:StatesService) { }
+
+  //PROFILE
+  getProfileData(customerId:any){
+    if(!this.customerProfile){
+      this.customerProfile = {
+        id: '000000000',
+        fname: 'Loading..',
+        lname: 'Loading..',
+        city: '',
+        region: '',
+        postalcode: '',
+        phone: '',
+      };
+
+      this.http.post("http://localhost:5000/profile",{id:customerId}).subscribe(
+      response=>{
+        var profileJson = JSON.parse(JSON.stringify(response));
+        this.customerProfile.id = profileJson.data.PROFILE['KUNNR'];
+        this.customerProfile.fname = profileJson.data.PROFILE['NAME1'];
+        this.customerProfile.lname = profileJson.data.PROFILE['NAME2'];
+        this.customerProfile.city = profileJson.data.PROFILE['ORT01'];
+        this.customerProfile.region = profileJson.data.PROFILE['REGIO'] +" "+this.states.getRegion(profileJson.data.PROFILE['REGIO']);
+        this.customerProfile.postalcode = profileJson.data.PROFILE['PSTLZ'];
+        this.customerProfile.phone = profileJson.data.PROFILE['TELF1'];
+
+      },
+      err => {
+        console.log(err);
+      }
+    )
+
+    }
+
+  }
+
+  get profData(){
+    return this.customerProfile;
+  }
+
 
   //INQUIRY
 
   getInquiryData(customerId:any){
-    console.log(customerId);
     if(!this.inquiryData){
 
     this.http.post("http://localhost:5000/inquirylist",{id:customerId}).subscribe(
@@ -61,6 +104,7 @@ export class NetworkService {
         this.saleorderJson = JSON.parse(JSON.stringify(response));
         this.saleorderData = this.saleorderJson.data.SALEORDERS.item;
         this.saleorderCount = this.saleorderData.length;
+
       },
       err => {
         console.log(err);
@@ -93,6 +137,7 @@ export class NetworkService {
         for(let i=1;i<this.deliveryData.length;i++){
           this.deliveryArray[i-1]=this.deliveryData[i]
         }
+
 
       },
       err => {
