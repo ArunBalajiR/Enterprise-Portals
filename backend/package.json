@@ -1,0 +1,24 @@
+{
+  "name": "customer-api",
+  "version": "1.0.0",
+  "description": "API for Customer portal",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js"
+  },
+  "author": "ARUN BALAJI R",
+  "license": "ISC",
+  "dependencies": {
+    "convert": "^4.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.18",
+    "request": "^2.88.2",
+    "response": "^0.18.0",
+    "unirest": "^0.6.0",
+    "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23"
+  }
+}

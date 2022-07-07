@@ -1,0 +1,70 @@
+body{
+  
+  padding-top: 1px;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.border-left{
+  border-left: 2px solid var(--primary) !important;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.sidebar{
+  top: 0;
+  left : 0;
+  z-index : 100;
+  overflow-y: auto;
+}
+
+.overlay{
+  background-color: rgb(0 0 0 / 45%);
+  z-index: 99;
+}
+
+/* sidebar for small screens */
+@media screen and (max-width: 767px){
+
+  .sidebar{
+    max-width: 18rem;
+    transform : translateX(-100%);
+    transition : transform 0.4s ease-out;
+  }
+
+  .sidebar.active{
+    transform : translateX(0);
+  }
+
+}
+
+
+.list-group-item {
+  text-decoration: none;
+}
+
+.dropdown-item {
+  text-decoration : none;
+}
+
+table tr th{
+  background:#2199e8;
+  color:white;
+  text-align:left;
+  vertical-align:center;
+}
+
+
+
+.table td, .table th {
+  padding: 0.30rem;
+}
+
