@@ -22,6 +22,19 @@ export class NetworkService {
   private deliveryCount:number=0;
   private deliveryArray:any=[];
 
+  private creditData:any;
+  private debitData:any;
+  private creditDebitJson:any;
+
+  private paymentData:any;
+  private paymentJson:any;
+
+  private invoiceData:any;
+  private invoiceLength:any;
+  private invoiceJson:any;
+  private invoiceGeneralLedger:any=[];
+
+
 
   public isLoading:boolean = false;
   constructor(private http:HttpClient,private states:StatesService) { }
@@ -154,6 +167,87 @@ export class NetworkService {
   get delCount(){
     return this.deliveryCount;
   }
+
+
+
+  //CREDIT AND DEBIT MEMO
+  getCreditDebitData(customerId:any){
+    if(!this.creditData || !this.debitData){
+
+    this.http.post("http://localhost:5000/creditdebitmemo",{id:customerId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.creditDebitJson = JSON.parse(JSON.stringify(response));
+        this.creditData = this.creditDebitJson.data.CREDITDATA.item;
+        this.debitData = this.creditDebitJson.data.DEBITDATA.item;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get credData() {
+    return this.creditData;
+  }
+
+  get debData(){
+    return this.debitData;
+  }
+
+  //PAYMENT AGING
+  getPaymentAgingData(customerId:any){
+    if(!this.paymentData){
+
+    this.http.post("http://localhost:5000/payment",{id:customerId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.paymentJson = JSON.parse(JSON.stringify(response));
+        this.paymentData = this.paymentJson.data.IT_DET.item;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get payData() {
+    return this.paymentData;
+  }
+
+
+  //INVOICE
+  getInvoiceData(customerId:any){
+    if(!this.invoiceData){
+    this.http.post("http://localhost:5000/invoice",{id:customerId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.invoiceJson = JSON.parse(JSON.stringify(response));
+        this.invoiceData = this.invoiceJson.data.INV_DET.item;
+        let k=0;
+        for (let i = 0; i < this.invoiceData.length; i++) {
+          if (this.invoiceData[i].KOART === 'S') {
+            this.invoiceGeneralLedger[k++] = this.invoiceData[i];
+          }
+        }
+        console.log(this.invoiceGeneralLedger);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get invData() {
+    return this.invoiceGeneralLedger;
+  }
+
 
 
 

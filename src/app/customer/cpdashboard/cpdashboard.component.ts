@@ -47,16 +47,24 @@ export class CpdashboardComponent implements OnInit {
 
 
 
-
-
-
-
   logOut() {
     localStorage.clear();
     this.router.navigate(['/customer'])
   }
   navToProfile() {
     this.router.navigate(['/profile'])
+  }
+
+  navToCustomerDashboard() {
+
+  }
+
+  navToCredit() {
+    this.router.navigate(['/credit'])
+  }
+
+  navToDebit() {
+    this.router.navigate(['/debit'])
   }
 
   navToDelivery() {
@@ -71,4 +79,11 @@ export class CpdashboardComponent implements OnInit {
     this.router.navigate(['/saleorder'])
   }
 
+  navToInvoice(){
+    this.router.navigate(['/invoice']);
+  }
+
+  navToPayment(){
+    this.router.navigate(['/payment']);
+  }
 }

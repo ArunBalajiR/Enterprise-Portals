@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class CpdeliveryComponent implements OnInit {
   page:number=1;
   constructor(
     public router: Router,
-    private http:HttpClient,
     public network:NetworkService,
 
 

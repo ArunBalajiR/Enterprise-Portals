@@ -41,11 +41,25 @@ export class StatesService {
     "34": "Jharkhand",
     "35": "Uttarakhand",
   }
+
+  koartACType:any={
+    "M" : "Material",
+    "D" : "Customer",
+    "K" : "Vendor",
+    "A" : "Asset",
+    "S" : "G/L"
+
+  };
   constructor() { }
 
   getRegion(num: any): string {
     return this.states[num];
   }
+
+  getACType(koart: any):string{
+    return this.koartACType[koart];
+  }
+
 }
 
 

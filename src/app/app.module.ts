@@ -18,6 +18,10 @@ import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CpinquiryComponent } from './customer/cpinquiry/cpinquiry.component';
 import { CpsaleorderComponent } from './customer/cpsaleorder/cpsaleorder.component';
+import { CpcreditComponent } from './customer/cpcredit/cpcredit.component';
+import { CpdebitComponent } from './customer/cpdebit/cpdebit.component';
+import { CppaymentComponent } from './customer/cppayment/cppayment.component';
+import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { CpsaleorderComponent } from './customer/cpsaleorder/cpsaleorder.compone
     StyleDirective,
     CpdeliveryComponent,
     CpinquiryComponent,
-    CpsaleorderComponent
+    CpsaleorderComponent,
+    CpcreditComponent,
+    CpdebitComponent,
+    CppaymentComponent,
+    CpinvoiceComponent
 
   ],
   imports: [

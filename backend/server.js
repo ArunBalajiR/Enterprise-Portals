@@ -257,7 +257,6 @@ app.post('/payment',(req,res)=>{
       res.json({ success : false, message : "No records found"});
     }
     else{
-      console.log(result.body);
       res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
     }
 
@@ -631,7 +630,6 @@ app.post('/invoice',(req,res)=>{
       res.json({ success : false, message : "No records found"});
     }
     else{
-      console.log(result.body);
       res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
     }
 
