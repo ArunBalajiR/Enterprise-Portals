@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShareddataService } from 'src/app/services/shareddata.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NetworkService } from 'src/app/services/network.service';
 @Component({
@@ -16,7 +15,6 @@ export class CpdashboardComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public router: Router,
-    private sharedData: ShareddataService,
     private network: NetworkService
 
     ) { }

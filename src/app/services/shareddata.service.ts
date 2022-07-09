@@ -4,19 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ShareddataService {
-  message:any
-  customerId:any;
-  array:string[]=[];
-  constructor() { }
+  invoieDetail:any;
 
-  setMessage(data: any,custno:any){
-    this.message=data;
-    this.customerId=custno;
+  setInvoie(data: any){
+    this.invoieDetail = data;
   }
 
-  getMessage(){
-    this.array[0]=this.message;
-    this.array[1]=this.customerId;
-    return this.array;
+  getInvoie(){
+    return this.invoieDetail;
+    console.log(this.invoieDetail);
   }
 }

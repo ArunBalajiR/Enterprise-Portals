@@ -17,50 +17,50 @@
           (click)="navToCustomerDashboard()"
           class="list-group-item list-group-item-action border-0 d-flex align-items-center"
         >
-          <span class="bi bi-border-all"></span>
+          <span class="bi bi-grid-1x2"></span>
           <span class="ml-2">Dashboard</span>
         </a>
 
         <a
-          href="#"
+          (click)="navToCredit()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-credit-card"></span>
           <span class="ml-2">Credit</span>
         </a>
         <a
-          href="#"
+          (click)="navToDebit()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-cash-stack"></span>
           <span class="ml-2">Debit</span>
         </a>
         <a
-          href="#"
+          (click)="navToPayment()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-wallet2"></span>
           <span class="ml-2">Payment</span>
         </a>
         <a
-          href="#"
+          (click)="navToInvoice()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-receipt"></span>
           <span class="ml-2">Invoice</span>
         </a>
         <a
-          href="#"
-          class="list-group-item list-group-item-action border-0 active align-items-center"
+          (click)="navToProfile()"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-person"></span>
           <span class="ml-2">Profile</span>
         </a>
         <a
-          href="#"
+          (click)="logOut()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-box"></span>
+          <span class="bi bi-box-arrow-right"></span>
           <span class="ml-2">Logout</span>
         </a>
 
@@ -132,8 +132,8 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="form-group">
-                    <label class="profile_details_text">Region:</label>
-                    <input type="text" value="{{customerProfile.region}}"  class="form-control" required readonly>
+                    <label class="profile_details_text">City:</label>
+                    <input type="text" value="{{customerProfile.city}}"  class="form-control" required readonly>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

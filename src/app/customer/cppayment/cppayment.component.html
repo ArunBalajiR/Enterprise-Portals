@@ -77,7 +77,7 @@
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
-        <h3>Credit Details</h3>
+        <h3>Payments and Aging</h3>
         <button class="btn py-0 d-lg-none" id="open-sidebar">
           <span class="bi bi-list text-primary h3"></span>
         </button>
@@ -106,8 +106,8 @@
           <div class="panel" data-ng-controller="validationCtrl">
             <div class="row">
               <div class="col-md-8">
-                <h6>Company Code: {{ paymentData[1].COMP_CODE }}</h6>
-                <h6>Customer: {{ +paymentData[1].CUSTOMER }}</h6>
+                <h6>Company  : {{ paymentData[1].BUKRS }}</h6>
+                <h6>Customer : {{ +paymentData[1].KUNNR }}</h6>
               </div>
               <div class="col-md-4">
                 <input
@@ -128,21 +128,25 @@
                 <thead>
                   <tr>
                     <th>Doc.No.</th>
+                    <th>Acccount No.</th>
+                    <th>Material</th>
+                    <th>Quantity</th>
                     <th>Amount</th>
                     <th>Billing Date</th>
-                    <th>Db.Cr.Indicator</th>
-                    <th>Doc.Type</th>
-                    <th>Fiscal Year</th>
+                    <th>Due Date</th>
+                    <th>Aging</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of paymentData | filter:searchKey | paginate:{itemsPerPage:6,currentPage:page}">
-                    <td>{{ +item.DOC_NO }}</td>
-                    <td>{{ item.AMOUNT }} {{item.CURRENCY}}</td>
-                    <td>{{ item.BLINE_DATE }}</td>
-                    <td>{{ item.DB_CR_IND === "S" ? "Debit" : "Credit" }}</td>
-                    <td>{{ item.DOC_TYPE }}</td>
-                    <td>{{ item.FISC_YEAR }}</td>
+                    <td>{{ +item.VBELN }}</td>
+                    <td>{{ item.BELNR }}</td>
+                    <td>{{ +item.MATNR }}</td>
+                    <td>{{ +item.MENGE }}</td>
+                    <td>{{ item.DMBTR }}  {{item.PSWSL}}</td>
+                    <td>{{ item.ZFBDT }}</td>
+                    <td>{{ item.MADAT }}</td>
+                    <td>{{ item.MANDT }}</td>
                   </tr>
                 </tbody>
               </table>

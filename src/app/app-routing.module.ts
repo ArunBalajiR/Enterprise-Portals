@@ -6,6 +6,7 @@ import { CpdebitComponent } from './customer/cpdebit/cpdebit.component';
 import { CpdeliveryComponent } from './customer/cpdelivery/cpdelivery.component';
 import { CpinquiryComponent } from './customer/cpinquiry/cpinquiry.component';
 import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
+import { CpinvoicedownloadComponent } from './customer/cpinvoicedownload/cpinvoicedownload.component';
 import { CploginComponent } from './customer/cplogin/cplogin.component';
 import { CppaymentComponent } from './customer/cppayment/cppayment.component';
 import { CpprofileComponent } from './customer/cpprofile/cpprofile.component';
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'invoice',
     component: CpinvoiceComponent
+  },
+  {
+    path: 'invpreview',
+    component: CpinvoicedownloadComponent
   },
   {
     path: 'payment',

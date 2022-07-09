@@ -22,6 +22,7 @@ import { CpcreditComponent } from './customer/cpcredit/cpcredit.component';
 import { CpdebitComponent } from './customer/cpdebit/cpdebit.component';
 import { CppaymentComponent } from './customer/cppayment/cppayment.component';
 import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
+import { CpinvoicedownloadComponent } from './customer/cpinvoicedownload/cpinvoicedownload.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
     CpcreditComponent,
     CpdebitComponent,
     CppaymentComponent,
-    CpinvoiceComponent
+    CpinvoiceComponent,
+    CpinvoicedownloadComponent
 
   ],
   imports: [

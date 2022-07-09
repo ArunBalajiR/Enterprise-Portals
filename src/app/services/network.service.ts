@@ -28,6 +28,7 @@ export class NetworkService {
 
   private paymentData:any;
   private paymentJson:any;
+  private paymentGeneralLedger:any=[];
 
   private invoiceData:any;
   private invoiceLength:any;
@@ -59,7 +60,7 @@ export class NetworkService {
         this.customerProfile.fname = profileJson.data.PROFILE['NAME1'];
         this.customerProfile.lname = profileJson.data.PROFILE['NAME2'];
         this.customerProfile.city = profileJson.data.PROFILE['ORT01'];
-        this.customerProfile.region = profileJson.data.PROFILE['REGIO'] +" "+this.states.getRegion(profileJson.data.PROFILE['REGIO']);
+        this.customerProfile.region = profileJson.data.PROFILE['REGIO'];
         this.customerProfile.postalcode = profileJson.data.PROFILE['PSTLZ'];
         this.customerProfile.phone = profileJson.data.PROFILE['TELF1'];
 
@@ -201,12 +202,31 @@ export class NetworkService {
   getPaymentAgingData(customerId:any){
     if(!this.paymentData){
 
-    this.http.post("http://localhost:5000/payment",{id:customerId}).subscribe(
+    this.http.post("http://localhost:5000/invoice",{id:customerId}).subscribe(
       response =>{
         this.isLoading = true;
         console.log(response);
         this.paymentJson = JSON.parse(JSON.stringify(response));
-        this.paymentData = this.paymentJson.data.IT_DET.item;
+        this.paymentData = this.paymentJson.data.INV_DET.item;
+        let k=0;
+        for (let i = 0; i < this.paymentData.length; i++) {
+          if (this.paymentData[i].KOART === 'S') {
+            this.paymentGeneralLedger[k++] = this.paymentData[i];
+          }
+        }
+
+        for (let i = 0; i < this.paymentGeneralLedger.length; i++) {
+          if (this.paymentGeneralLedger[i].MANDT === 100) {
+            var due_date = new Date(this.paymentGeneralLedger[i].MADAT);
+            let curr_date = new Date();
+            var time = curr_date.getTime() - due_date.getTime();
+            var day = time / (1000 * 3600 * 24);
+            if (Math.floor(day) > 0) {
+              this.paymentGeneralLedger[i].MANDT = Math.floor(day);
+            }
+          }
+        }
+
       },
       err => {
         console.log(err);
@@ -216,7 +236,7 @@ export class NetworkService {
   }
 
   get payData() {
-    return this.paymentData;
+    return this.paymentGeneralLedger;
   }
 
 

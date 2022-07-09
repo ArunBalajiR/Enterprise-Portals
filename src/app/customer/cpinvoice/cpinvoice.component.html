@@ -106,7 +106,7 @@
           <div class="panel" data-ng-controller="validationCtrl">
             <div class="row">
               <div class="col-md-8">
-                <h6>Customer : {{ +invoiceData[1].KUNNR }}</h6>
+                <h6>Customer : {{ +customerId }}</h6>
                 <h6>Company : {{ invoiceData[1].BUKRS }}</h6>
               </div>
               <div class="col-md-4">
@@ -127,25 +127,32 @@
               >
                 <thead>
                   <tr>
-                    <th>Sales.Doc.No.</th>
+                    <th>Doc.No.</th>
                     <th>Acc.No.</th>
+                    <th>Material</th>
                     <th>Quantity</th>
                     <th>Unit</th>
                     <th>Amount</th>
+                    <th>Date</th>
                     <th>Fiscal Yr.</th>
                     <th>Invoice</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of invoiceData | filter:searchKey | paginate:{itemsPerPage:6,currentPage:page}">
-                    <td>{{ +item.VBEL2 }}</td>
+                  <tr *ngFor="let item of invoiceData | filter:searchKey | paginate:{itemsPerPage:5,currentPage:page}">
+                    <td>{{ +item.VBELN }}</td>
                     <td>{{ +item.BELNR }}</td>
+                    <td>{{ +item.MATNR }}</td>
                     <td>{{ +item.MENGE }}</td>
                     <td>{{ item.MEINS==="EA" ? "Each" : item.MEINS }}</td>
-                    <td>{{ item.DMBTR }}</td>
-
+                    <td>{{ item.DMBTR }}  {{item.CURRENCY}}</td>
+                    <td>{{ item.MADAT }}</td>
                     <td>{{ item.GJAHR }}</td>
-                    <td>{{ item.LFUHR }}</td>
+                    <td> <button
+                      (click)="previewInvoice(item)"
+                      id="b2" class="icon-button">
+                      <i class="fa fa-download"></i>
+                      <i class="fa fa-file-pdf fa--bottom"></i>Download</button> </td>
                   </tr>
                 </tbody>
               </table>

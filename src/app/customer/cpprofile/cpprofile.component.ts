@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShareddataService } from '../../services/shareddata.service';
 import { NetworkService } from 'src/app/services/network.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class CpprofileComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public sharedData:ShareddataService,
     public network:NetworkService
   ) {}
 
@@ -29,15 +27,45 @@ export class CpprofileComponent implements OnInit {
     return this.network.customerProfile;
   }
 
-  logOut(): void {
+
+  logOut() {
     localStorage.clear();
     this.router.navigate(['/customer'])
+  }
+  navToProfile() {
 
   }
 
-  navToCustomerDashboard(): void {
-    this.router.navigate(['/customerdashboard']);
+  navToCustomerDashboard() {
+    this.router.navigate(['/customerdashboard'])
   }
 
+  navToCredit() {
+    this.router.navigate(['/credit'])
+  }
+
+  navToDebit() {
+    this.router.navigate(['/debit'])
+  }
+
+  navToDelivery() {
+    this.router.navigate(['/delivery'])
+  }
+
+  navToInquiry() {
+    this.router.navigate(['/inquiry'])
+  }
+
+  navToSaleorder() {
+    this.router.navigate(['/saleorder'])
+  }
+
+  navToInvoice(){
+    this.router.navigate(['/invoice']);
+  }
+
+  navToPayment(){
+    this.router.navigate(['/payment']);
+  }
 
 }

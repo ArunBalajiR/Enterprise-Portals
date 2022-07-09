@@ -2,39 +2,68 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NetworkService } from 'src/app/services/network.service';
 import { ShareddataService } from 'src/app/services/shareddata.service';
-
+import { StatesService } from 'src/app/services/states';
+import jspdf from 'jspdf';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-cpinvoice',
-  templateUrl: './cpinvoice.component.html',
-  styleUrls: ['./cpinvoice.component.css']
+  selector: 'app-cpinvoicedownload',
+  templateUrl: './cpinvoicedownload.component.html',
+  styleUrls: ['./cpinvoicedownload.component.css']
 })
-export class CpinvoiceComponent implements OnInit {
+export class CpinvoicedownloadComponent implements OnInit {
 
   searchKey: any;
   customerId: any;
+  today: any = new Date();
+
   page: number = 1;
+
   constructor(
     public router: Router,
     public network: NetworkService,
     public sharedData: ShareddataService,
+    public koart: StatesService
   ) { }
 
   ngOnInit(): void {
     this.customerId = localStorage.getItem("customerId");
-    this.network.getInvoiceData(this.customerId);
     this.network.getProfileData(this.customerId);
+
   }
 
-  get invoiceData() {
-    return this.network.invData;
+  get customerProfile() {
+    return this.network.customerProfile;
   }
 
-  previewInvoice(invoiceDetail:any){
-    this.sharedData.setInvoie(invoiceDetail);
-    this.router.navigate(['/invpreview'])
+  get invoiceDetail() {
+    return this.sharedData.invoieDetail;
   }
 
+
+
+  generatePDF = () => {
+    var data: any = document.getElementById('invoice');
+    let now = new Date();
+    const doc = new jspdf({ compress: true });
+    doc.setDisplayMode(1);
+    doc.html(data, {
+      callback: function (doc) {
+        for(let i=2;i<6;i++){
+          doc.deletePage(2);
+        }
+        doc.save(`certificate_${now.toLocaleDateString()}.pdf`);
+      },
+      x: 18,
+      y: 2,
+      html2canvas: { scale: 0.25 },
+    });
+
+
+
+
+  }
 
   logOut() {
     localStorage.clear();
@@ -69,11 +98,12 @@ export class CpinvoiceComponent implements OnInit {
   }
 
   navToInvoice() {
-
+    this.router.navigate(['/invoice'])
   }
 
   navToPayment() {
     this.router.navigate(['/payment']);
   }
+
 
 }

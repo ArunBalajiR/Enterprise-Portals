@@ -42,7 +42,7 @@ export class CploginComponent implements OnInit {
       response => {
         this.Data = JSON.parse(JSON.stringify(response));
         if (this.Data.success) {
-          
+
           localStorage.setItem('customerId', this.authUser.userid);
           localStorage.setItem('customerName', this.Data.data['NAME']);
           console.log(this.Data.data['NAME']);
@@ -58,9 +58,6 @@ export class CploginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnDestroy():void{
-    this.shareddata.setMessage(this.Data.NAME,this.authUser.id)
-  }
 
 
 
