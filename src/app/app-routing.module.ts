@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'customer',
-    component: CploginComponent
+    component: CploginComponent,
   },
   {
     path: 'profile',

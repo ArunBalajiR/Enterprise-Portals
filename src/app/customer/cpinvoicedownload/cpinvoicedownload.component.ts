@@ -4,8 +4,7 @@ import { NetworkService } from 'src/app/services/network.service';
 import { ShareddataService } from 'src/app/services/shareddata.service';
 import { StatesService } from 'src/app/services/states';
 import jspdf from 'jspdf';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-cpinvoicedownload',
@@ -18,13 +17,15 @@ export class CpinvoicedownloadComponent implements OnInit {
   customerId: any;
   today: any = new Date();
 
+
   page: number = 1;
 
   constructor(
     public router: Router,
     public network: NetworkService,
     public sharedData: ShareddataService,
-    public koart: StatesService
+    public koart: StatesService,
+
   ) { }
 
   ngOnInit(): void {

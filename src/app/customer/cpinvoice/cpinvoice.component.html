@@ -95,7 +95,7 @@
             class="dropdown-menu dropdown-menu-right border-0 shadow-sm"
             aria-labelledby="logout-dropdown"
           >
-            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" (click)="navToProfile()">Profile</a>
             <a class="dropdown-item" (click)="logOut()">Logout</a>
           </div>
         </div>
@@ -146,7 +146,7 @@
                     <td>{{ +item.MENGE }}</td>
                     <td>{{ item.MEINS==="EA" ? "Each" : item.MEINS }}</td>
                     <td>{{ item.DMBTR }}  {{item.CURRENCY}}</td>
-                    <td>{{ item.MADAT }}</td>
+                    <td>{{ item.MADAT | formattedDate }}</td>
                     <td>{{ item.GJAHR }}</td>
                     <td> <button
                       (click)="previewInvoice(item)"

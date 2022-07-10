@@ -23,6 +23,7 @@ import { CpdebitComponent } from './customer/cpdebit/cpdebit.component';
 import { CppaymentComponent } from './customer/cppayment/cppayment.component';
 import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
 import { CpinvoicedownloadComponent } from './customer/cpinvoicedownload/cpinvoicedownload.component';
+import { FormattedDatePipe } from './pipes/formatted-date.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CpinvoicedownloadComponent } from './customer/cpinvoicedownload/cpinvoi
     CpdebitComponent,
     CppaymentComponent,
     CpinvoiceComponent,
-    CpinvoicedownloadComponent
+    CpinvoicedownloadComponent,
+    FormattedDatePipe
 
   ],
   imports: [

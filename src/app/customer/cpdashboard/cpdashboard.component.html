@@ -94,7 +94,7 @@
             class="dropdown-menu dropdown-menu-right border-0 shadow-sm"
             aria-labelledby="logout-dropdown"
           >
-            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" (click)="navToProfile()">Profile</a>
             <a class="dropdown-item" (click)="logOut()">Logout</a>
           </div>
         </div>
@@ -122,19 +122,12 @@
 
         </section>
 
-        <div
-          class="jumbotron jumbotron-fluid rounded bg-white border-0 shadow-sm border-left px-4"
-        >
-          <div class="container">
-            <h1 class="display-4 mb-2 text-primary">Simple</h1>
-            <p class="lead text-muted">
-              Simple Admin Dashboard with Bootstrap.
-            </p>
-          </div>
-        </div>
+
       </main>
 
-      <app-footer></app-footer>
+      <div class="fixed-bottom">
+        <app-footer></app-footer>
+      </div>
     </div>
   </div>
 

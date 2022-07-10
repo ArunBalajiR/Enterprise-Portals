@@ -92,7 +92,7 @@
             class="dropdown-menu dropdown-menu-right border-0 shadow-sm"
             aria-labelledby="logout-dropdown"
           >
-            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" (click)="navToProfile()">Profile</a>
             <a class="dropdown-item" (click)="logOut()">Logout</a>
           </div>
         </div>
@@ -116,9 +116,9 @@
                     >
                   </h1>
                   <p>
-                    Baseline Payment Date: <span id="gl_date">{{invoiceDetail.ZFBDT}}</span>
+                    Baseline Payment Date: <span id="gl_date">{{invoiceDetail.ZFBDT | formattedDate}}</span>
                     <br />
-                    Last Dunn Date: <span id="invoice_date">{{invoiceDetail.MADAT}}</span
+                    Last Dunn Date: <span id="invoice_date">{{invoiceDetail.MADAT | formattedDate }}</span
                     ><br />
                     Invoice Date: <span id="gl_date">{{today.toLocaleDateString()}}</span>
                   </p>
@@ -135,7 +135,7 @@
                       >{{invoiceDetail.VBELN}}</span
                     >
                     is created for customer number
-                    <span id="supplier_name">{{customerProfile.id}}</span> on {{today.toLocaleDateString()}}.
+                    <span id="supplier_name">{{customerProfile.id}}</span> on {{today.toLocaleDateString() }}.
                     This is a computer generated invoice and does not require a physical signature.
                   </p>
                 </div>
