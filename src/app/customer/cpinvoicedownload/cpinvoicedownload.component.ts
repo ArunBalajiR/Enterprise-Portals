@@ -51,14 +51,14 @@ export class CpinvoicedownloadComponent implements OnInit {
     doc.setDisplayMode(1);
     doc.html(data, {
       callback: function (doc) {
-        for(let i=2;i<6;i++){
+        for(let i=2;i<7;i++){
           doc.deletePage(2);
         }
-        doc.save(`certificate_${now.toLocaleDateString()}.pdf`);
+        doc.save(`Invoice${now.toLocaleDateString()}.pdf`);
       },
-      x: 18,
+      x: 8,
       y: 2,
-      html2canvas: { scale: 0.25 },
+      html2canvas: { scale: 0.28 },
     });
 
 
