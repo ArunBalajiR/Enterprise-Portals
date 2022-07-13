@@ -13,6 +13,9 @@ import { CpprofileComponent } from './customer/cpprofile/cpprofile.component';
 import { CpsaleorderComponent } from './customer/cpsaleorder/cpsaleorder.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './services/auth.guard';
+import { VpdashboardComponent } from './vendor/vpdashboard/vpdashboard.component';
+import { VploginComponent } from './vendor/vplogin/vplogin.component';
+import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
 
 const routes: Routes = [
   {
@@ -67,7 +70,19 @@ const routes: Routes = [
   {
     path: 'payment',
     component: CppaymentComponent
-  }
+  },
+  {
+    path: 'vendor',
+    component: VploginComponent
+  },
+  {
+    path: 'vendordashboard',
+    component: VpdashboardComponent
+  },
+  {
+    path: 'vprofile',
+    component: VpprofileComponent
+  },
 ];
 
 @NgModule({

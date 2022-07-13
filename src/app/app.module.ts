@@ -24,6 +24,9 @@ import { CppaymentComponent } from './customer/cppayment/cppayment.component';
 import { CpinvoiceComponent } from './customer/cpinvoice/cpinvoice.component';
 import { CpinvoicedownloadComponent } from './customer/cpinvoicedownload/cpinvoicedownload.component';
 import { FormattedDatePipe } from './pipes/formatted-date.pipe';
+import { VploginComponent } from './vendor/vplogin/vplogin.component';
+import { VpdashboardComponent } from './vendor/vpdashboard/vpdashboard.component';
+import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { FormattedDatePipe } from './pipes/formatted-date.pipe';
     CppaymentComponent,
     CpinvoiceComponent,
     CpinvoicedownloadComponent,
-    FormattedDatePipe
+    FormattedDatePipe,
+    VploginComponent,
+    VpdashboardComponent,
+    VpprofileComponent
 
   ],
   imports: [
