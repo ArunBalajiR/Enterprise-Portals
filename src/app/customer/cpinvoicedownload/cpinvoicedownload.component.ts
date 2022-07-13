@@ -61,9 +61,6 @@ export class CpinvoicedownloadComponent implements OnInit {
       html2canvas: { scale: 0.28 },
     });
 
-
-
-
   }
 
   logOut() {
