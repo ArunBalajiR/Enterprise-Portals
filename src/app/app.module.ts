@@ -38,6 +38,7 @@ import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoice
 import { EploginComponent } from './employee/eplogin/eplogin.component';
 import { EpprofileComponent } from './employee/epprofile/epprofile.component';
 import { EpdashboardComponent } from './employee/epdashboard/epdashboard.component';
+import { VpquotitemComponent } from './vendor/vpquotitem/vpquotitem.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { EpdashboardComponent } from './employee/epdashboard/epdashboard.compone
     VpinvoicedownloadComponent,
     EploginComponent,
     EpprofileComponent,
-    EpdashboardComponent
+    EpdashboardComponent,
+    VpquotitemComponent
 
   ],
   imports: [

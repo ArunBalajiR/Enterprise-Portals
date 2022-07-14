@@ -27,18 +27,17 @@ export class VpdashboardComponent implements OnInit {
     this.vendorId = localStorage.getItem('vendorId');
 
     this.network.getQuotationData(this.vendorId);
-    // this.network.getSaleorderData(this.vendorId);
+    this.network.getPurchaseOrderData(this.vendorId);
     // this.network.getInquiryData(this.vendorId);
 
   }
-
 
   get goodsreceiptCount(){
     return this.network.delCount;
   }
 
   get purchaseorderCount(){
-    return this.network.saleCount;
+    return this.network.poCount;
   }
 
   get quotationCount(){

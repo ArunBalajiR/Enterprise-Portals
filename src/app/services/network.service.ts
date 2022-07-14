@@ -39,15 +39,24 @@ export class NetworkService {
   private quotationData:any;
   private quotationJson:any;
   private quotationCount:number=0;
+  private quotationArray:any=[];
 
   private purchaseorderData:any;
   private purchaseorderJson:any;
   private purchaseorderCount:number=0;
+  private purchaseorderArray:any=[];
 
   private goodsreceiptData:any;
   private goodsreceiptJson:any;
   private goodsreceiptCount:number=0;
   private goodsreceiptArray:any=[];
+
+  private vcreditData:any;
+  private vdebitData:any;
+  private vcreditDebitJson:any;
+
+  
+
 
 
   public isLoading:boolean = false;
@@ -268,7 +277,6 @@ export class NetworkService {
             this.invoiceGeneralLedger[k++] = this.invoiceData[i];
           }
         }
-        console.log(this.invoiceGeneralLedger);
       },
       err => {
         console.log(err);
@@ -334,8 +342,13 @@ export class NetworkService {
         this.isLoading = true;
         console.log(response);
         this.quotationJson = JSON.parse(JSON.stringify(response));
-        // this.quotationData = this.quotationJson.data.quotationLIST.item;
-        // this.quotationCount = (this.quotationData.length);
+        this.quotationData = this.quotationJson.data.RFQ_HEAD.item;
+        let k=0;
+        for (let i = 1; i < this.quotationData.length; i++) {
+            this.quotationArray[k++] = this.quotationData[i];
+        }
+        this.quotationCount = (this.quotationArray.length);
+
       },
       err => {
         console.log(err);
@@ -345,11 +358,101 @@ export class NetworkService {
   }
 
   get quotData() {
-    return this.quotationData;
+    return this.quotationArray;
   }
 
   get quotCount() {
     return this.quotationCount;
+  }
+
+  // PURCHSE ORDER
+  getPurchaseOrderData(vendorId:any){
+    if(!this.purchaseorderData){
+    this.http.post("http://localhost:5000/vendorpo",{id:vendorId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.purchaseorderJson = JSON.parse(JSON.stringify(response));
+        this.purchaseorderData = this.purchaseorderJson.data.ITEMDATA.item;
+        let k=0;
+        for (let i = 1; i < this.purchaseorderData.length; i++) {
+            this.purchaseorderArray[k++] = this.purchaseorderData[i];
+        }
+        this.purchaseorderCount = (this.purchaseorderArray.length);
+
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get poData() {
+    return this.purchaseorderArray;
+  }
+
+  get poCount() {
+    return this.purchaseorderCount;
+  }
+
+// GOODS RECEIPT
+getGoodsReceiptData(vendorId:any){
+  if(!this.goodsreceiptData){
+  this.http.post("http://localhost:5000/vendorgoodsreceipt",{id:vendorId}).subscribe(
+    response =>{
+      this.isLoading = true;
+      console.log(response);
+      this.goodsreceiptJson = JSON.parse(JSON.stringify(response));
+      // this.goodsreceiptData = this.goodsreceiptJson.data.ITEMDATA.item;
+      // let k=0;
+      // for (let i = 1; i < this.goodsreceiptData.length; i++) {
+      //     this.goodsreceiptArray[k++] = this.goodsreceiptData[i];
+      // }
+      // this.goodsreceiptCount = (this.goodsreceiptArray.length);
+
+    },
+    err => {
+      console.log(err);
+    }
+  )
+  }
+}
+
+get grData() {
+  return this.goodsreceiptArray;
+}
+
+get grCount() {
+  return this.goodsreceiptCount;
+}
+
+
+  //VENDOR CREDIT AND DEBIT MEMO
+  getVCreditDebitData(vendorId:any){
+    if(!this.creditData || !this.debitData){
+
+    this.http.post("http://localhost:5000/vendorcreditdebit",{id:vendorId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.vcreditDebitJson = JSON.parse(JSON.stringify(response));
+        this.vcreditData = this.vcreditDebitJson.data.CREDITDATA.item;
+        this.vdebitData = this.vcreditDebitJson.data.DEBITDATA.item;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get vcredData() {
+    return this.vcreditData;
+  }
+
+  get vdebData(){
+    return this.vdebitData;
   }
 
 

@@ -56,6 +56,6 @@ export class VploginComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+   ngOnInit(): void {}
 
 }

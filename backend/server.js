@@ -732,7 +732,7 @@ app.post('/vendorinvoicelist',(req,res)=>{
 
 });
 
-// VENDOR profile
+// VENDOR INVOICE DETAIL
 app.post('/vendorinvoicedetail',(req,res)=>{
   let id = req.body.id;
   var invoicedetailBody = `<?xml version="1.0" encoding="UTF-8"?>
