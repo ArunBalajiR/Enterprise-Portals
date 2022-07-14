@@ -38,6 +38,7 @@ export class VploginComponent implements OnInit {
   onSubmit(f: NgForm) {
     this.authUser.id = f.value.userid;
     this.authUser.password = f.value.password;
+    console.log(this.authUser);
     return this.http.post(this._loginUrl, this.authUser).subscribe(
       response => {
         this.Data = JSON.parse(JSON.stringify(response));
