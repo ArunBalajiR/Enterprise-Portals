@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ShareddataService } from 'src/app/services/shareddata.service';
+
 
 @Component({
   selector: 'app-vplogin',
@@ -23,8 +23,7 @@ export class VploginComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public router: Router,
-    public shareddata:ShareddataService
+    public router: Router
   )
 
   {
@@ -42,24 +41,20 @@ export class VploginComponent implements OnInit {
       response => {
         this.Data = JSON.parse(JSON.stringify(response));
         console.log(this.Data);
-        // if (this.Data.success) {
-          
-          // localStorage.setItem('vendorId', this.authUser.userid);
-          // localStorage.setItem('vendorName', this.Data.data['NAME']);
-        //   console.log(this.Data.data['NAME']);
-        //   this.router.navigate(['/vendordashboard']);
-        // }
-        // else {
-        //   this.flag = false;
-        // }
+        if (this.Data.success) {
+
+          localStorage.setItem('vendorId', this.authUser.userid);
+          localStorage.setItem('vendorName', this.Data.data['NAME']);
+          this.router.navigate(['/vendordashboard']);
+        }
+        else {
+          this.flag = false;
+        }
       }
     )
 
   }
 
   ngOnInit(): void {}
-
-
-
 
 }
