@@ -13,9 +13,17 @@ import { CpprofileComponent } from './customer/cpprofile/cpprofile.component';
 import { CpsaleorderComponent } from './customer/cpsaleorder/cpsaleorder.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './services/auth.guard';
+import { VpcreditComponent } from './vendor/vpcredit/vpcredit.component';
 import { VpdashboardComponent } from './vendor/vpdashboard/vpdashboard.component';
+import { VpdebitComponent } from './vendor/vpdebit/vpdebit.component';
+import { VpgoodsreceiptComponent } from './vendor/vpgoodsreceipt/vpgoodsreceipt.component';
+import { VpinvoiceComponent } from './vendor/vpinvoice/vpinvoice.component';
+import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoicedownload.component';
 import { VploginComponent } from './vendor/vplogin/vplogin.component';
+import { VppaymentsComponent } from './vendor/vppayments/vppayments.component';
 import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
+import { VppurorderComponent } from './vendor/vppurorder/vppurorder.component';
+import { VpquotationComponent } from './vendor/vpquotation/vpquotation.component';
 
 const routes: Routes = [
   {
@@ -83,6 +91,42 @@ const routes: Routes = [
     path: 'vprofile',
     component: VpprofileComponent
   },
+  {
+    path: 'quotation',
+    component: VpquotationComponent,
+
+  },
+  {
+    path: 'po',
+    component: VppurorderComponent,
+
+  },
+  {
+    path: 'goodsreceipt',
+    component: VpgoodsreceiptComponent,
+
+  },
+  {
+    path: 'vinvoice',
+    component: VpinvoiceComponent,
+
+  },
+  {
+    path: 'vdebit',
+    component: VpdebitComponent
+  },
+  {
+    path: 'vcredit',
+    component: VpcreditComponent
+  },
+  {
+    path: 'vinvpreview',
+    component: VpinvoicedownloadComponent
+  },
+  {
+    path: 'vpayment',
+    component: VppaymentsComponent
+  }
 ];
 
 @NgModule({

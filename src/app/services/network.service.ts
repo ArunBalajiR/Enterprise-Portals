@@ -7,6 +7,7 @@ import { StatesService } from '../services/states';
 export class NetworkService {
 
   customerProfile: any;
+  vendorProfile:any;
 
 
   private inquiryData:any;
@@ -35,12 +36,24 @@ export class NetworkService {
   private invoiceJson:any;
   private invoiceGeneralLedger:any=[];
 
+  private quotationData:any;
+  private quotationJson:any;
+  private quotationCount:number=0;
+
+  private purchaseorderData:any;
+  private purchaseorderJson:any;
+  private purchaseorderCount:number=0;
+
+  private goodsreceiptData:any;
+  private goodsreceiptJson:any;
+  private goodsreceiptCount:number=0;
+  private goodsreceiptArray:any=[];
 
 
   public isLoading:boolean = false;
   constructor(private http:HttpClient,private states:StatesService) { }
 
-  //PROFILE
+  //Customer PROFILE
   getProfileData(customerId:any){
     if(!this.customerProfile){
       this.customerProfile = {
@@ -268,7 +281,80 @@ export class NetworkService {
     return this.invoiceGeneralLedger;
   }
 
+  //Vendor PROFILE
+  getVProfileData(vendorId:any){
+  if(!this.vendorProfile){
+    this.vendorProfile = {
+      id: 'Loading..',
+      fname: 'Loading..',
+      lname: 'Loading..',
+      street: '',
+      city: '',
+      country:'',
+      region: '',
+      postalcode: '',
+      phone: '',
+    };
+
+    this.http.post("http://localhost:5000/vendorprofile",{id:vendorId}).subscribe(
+    response=>{
+      var vprofileJson = JSON.parse(JSON.stringify(response));
+      this.vendorProfile.id = vprofileJson.data.PROFILE['VENDOR'];
+      this.vendorProfile.fname = vprofileJson.data.PROFILE['NAME'];
+      this.vendorProfile.lname = vprofileJson.data.PROFILE['NAME_2'];
+      this.vendorProfile.street = vprofileJson.data.PROFILE['STREET'];
+      this.vendorProfile.city = vprofileJson.data.PROFILE['CITY'];
+      this.vendorProfile.country = vprofileJson.data.PROFILE['COUNTRY'];
+      this.vendorProfile.region = vprofileJson.data.PROFILE['REGION'];
+      this.vendorProfile.postalcode = vprofileJson.data.PROFILE['POSTL_CODE'];
+      this.vendorProfile.phone = vprofileJson.data.PROFILE['TELEPHONE'];
+
+    },
+    err => {
+      console.log(err);
+    }
+  )
+
+  }
+
+  }
+
+  get vprofData(){
+    return this.vendorProfile;
+  }
+
+
+  //QUOTATION
+
+  getQuotationData(vendorId:any){
+    if(!this.quotationData){
+
+    this.http.post("http://localhost:5000/vendorrfq",{id:vendorId}).subscribe(
+      response =>{
+        this.isLoading = true;
+        console.log(response);
+        this.quotationJson = JSON.parse(JSON.stringify(response));
+        // this.quotationData = this.quotationJson.data.quotationLIST.item;
+        // this.quotationCount = (this.quotationData.length);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    }
+  }
+
+  get quotData() {
+    return this.quotationData;
+  }
+
+  get quotCount() {
+    return this.quotationCount;
+  }
+
+
 
 
 
 }
+

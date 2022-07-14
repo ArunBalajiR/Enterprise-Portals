@@ -27,6 +27,17 @@ import { FormattedDatePipe } from './pipes/formatted-date.pipe';
 import { VploginComponent } from './vendor/vplogin/vplogin.component';
 import { VpdashboardComponent } from './vendor/vpdashboard/vpdashboard.component';
 import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
+import { VpquotationComponent } from './vendor/vpquotation/vpquotation.component';
+import { VppurorderComponent } from './vendor/vppurorder/vppurorder.component';
+import { VpgoodsreceiptComponent } from './vendor/vpgoodsreceipt/vpgoodsreceipt.component';
+import { VpinvoiceComponent } from './vendor/vpinvoice/vpinvoice.component';
+import { VppaymentsComponent } from './vendor/vppayments/vppayments.component';
+import { VpcreditComponent } from './vendor/vpcredit/vpcredit.component';
+import { VpdebitComponent } from './vendor/vpdebit/vpdebit.component';
+import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoicedownload.component';
+import { EploginComponent } from './employee/eplogin/eplogin.component';
+import { EpprofileComponent } from './employee/epprofile/epprofile.component';
+import { EpdashboardComponent } from './employee/epdashboard/epdashboard.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +60,18 @@ import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
     FormattedDatePipe,
     VploginComponent,
     VpdashboardComponent,
-    VpprofileComponent
+    VpprofileComponent,
+    VpquotationComponent,
+    VppurorderComponent,
+    VpgoodsreceiptComponent,
+    VpinvoiceComponent,
+    VppaymentsComponent,
+    VpcreditComponent,
+    VpdebitComponent,
+    VpinvoicedownloadComponent,
+    EploginComponent,
+    EpprofileComponent,
+    EpdashboardComponent
 
   ],
   imports: [
