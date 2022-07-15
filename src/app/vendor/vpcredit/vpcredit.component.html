@@ -35,13 +35,31 @@
           <span class="bi bi-cash-stack"></span>
           <span class="ml-2">Debit</span>
         </a>
-        <a
-          (click)="navToPayment()"
-          class="list-group-item list-group-item-action border-0 align-items-center"
+        <button
+          class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+          data-toggle="collapse"
+          data-target="#sale-collapse"
         >
-          <span class="bi bi-wallet2"></span>
-          <span class="ml-2">Payment</span>
-        </a>
+          <div>
+            <span class="bi bi-wallet2"></span>
+            <span class="ml-2">Payment</span>
+          </div>
+          <span class="bi bi-chevron-down small"></span>
+        </button>
+        <div class="collapse" id="sale-collapse" data-parent="#sidebar">
+          <div class="list-group">
+            <a
+              (click)="navToOpenPayment()"
+              class="list-group-item list-group-item-action pl-5"
+              >Open</a
+            >
+            <a
+              (click)="navToClosePayment()"
+              class="list-group-item list-group-item-action border-0 pl-5"
+              >Closed</a
+            >
+          </div>
+        </div>
         <a
           (click)="navToInvoice()"
           class="list-group-item list-group-item-action border-0 align-items-center"
@@ -49,21 +67,6 @@
           <span class="bi bi-receipt"></span>
           <span class="ml-2">Invoice</span>
         </a>
-        <a
-          (click)="navToVendorProfile()"
-          class="list-group-item list-group-item-action border-0 align-items-center"
-        >
-          <span class="bi bi-person"></span>
-          <span class="ml-2">Profile</span>
-        </a>
-        <a
-          (click)="logOut()"
-          class="list-group-item list-group-item-action border-0 align-items-center"
-        >
-          <span class="bi bi-box-arrow-right"></span>
-          <span class="ml-2">Logout</span>
-        </a>
-
 
       </div>
     </div>
@@ -107,7 +110,7 @@
             <div class="row">
               <div class="col-md-8">
                 <h6>Plant : {{ creditData[1].WERKS }}</h6>
-                <h6>Customer No : {{ +creditData[1].KUNNR }}</h6>
+                <h6>Customer ID : {{ creditData[1].LIFNR }}</h6>
               </div>
               <div class="col-md-4">
                 <input
@@ -143,7 +146,7 @@
                     <td>{{ +item.MATNR }}</td>
                     <td>{{ item.MEINS==="EA" ? "Each" : item.MEINS }}</td>
                     <td>{{ +item.MENGE }}</td>
-                    <td>{{ item.DMBTR }}</td>
+                    <td>{{ +item.DMBTR }}</td>
                     <td>{{ item.GJAHR }}</td>
                     <td>{{ koart.getACType( item.KOART) }}</td>
                     <td>{{ item.XBILK==="X" ? "Yes" : "No" }}</td>

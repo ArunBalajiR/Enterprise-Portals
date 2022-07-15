@@ -37,6 +37,7 @@ export class CpdeliveryComponent implements OnInit {
 
   logOut(): void {
     localStorage.clear();
+    this.network.logoutClearCache();
     this.router.navigate(['/customer'])
   }
 

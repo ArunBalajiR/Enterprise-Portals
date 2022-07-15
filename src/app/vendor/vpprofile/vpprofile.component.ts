@@ -28,10 +28,11 @@ export class VpprofileComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
+    this.network.logoutClearCache();
     this.router.navigate(['/vendor'])
   }
   navToVendorProfile() {
-    
+
   }
 
   navToVendorDashboard() {

@@ -31,6 +31,7 @@ get creditData(){
 
 logOut() {
   localStorage.clear();
+  this.network.logoutClearCache();
   this.router.navigate(['/vendor'])
 }
 navToVendorProfile() {
@@ -65,8 +66,12 @@ navToInvoice() {
   this.router.navigate(['/vinvoice']);
 }
 
-navToPayment() {
-  this.router.navigate(['/vpayment']);
+
+navToClosePayment() {
+  this.router.navigate(['/vpaymentc']);
 }
 
+navToOpenPayment() {
+  this.router.navigate(['/vpayment']);
+}
 }

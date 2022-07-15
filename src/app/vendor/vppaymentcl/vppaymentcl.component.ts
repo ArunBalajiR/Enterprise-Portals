@@ -2,27 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NetworkService } from 'src/app/services/network.service';
 
-
 @Component({
-  selector: 'app-vpgoodsreceipt',
-  templateUrl: './vpgoodsreceipt.component.html',
-  styleUrls: ['./vpgoodsreceipt.component.css']
+  selector: 'app-vppaymentcl',
+  templateUrl: './vppaymentcl.component.html',
+  styleUrls: ['./vppaymentcl.component.css']
 })
-export class VpgoodsreceiptComponent implements OnInit {
+export class VppaymentclComponent implements OnInit {
+
 
   searchKey: any;
   vendorId: any;
-
+  today: any;
   page: number = 1;
-  constructor(public router: Router, public network: NetworkService) { }
+  constructor(
+    public router: Router,
+    public network: NetworkService,
+  ) { }
 
   ngOnInit(): void {
     this.vendorId = localStorage.getItem("vendorId");
-    this.network.getGoodsReceiptData(this.vendorId);
+    this.network.getVPaymentAgingData(this.vendorId);
+    this.today = new Date();
   }
 
-  get goodsReceiptData() {
-    return this.network.grHeaderData;
+
+  get vpaymentCData() {
+    return this.network.vclosedpayData;
   }
 
 
@@ -48,11 +53,11 @@ export class VpgoodsreceiptComponent implements OnInit {
   }
 
   navToQuotation() {
-    this.router.navigate(['/quotation'])
+
   }
 
   navToPurchaseOrder() {
-
+    this.router.navigate(['/po'])
   }
 
   navToGoodsReceipt() {
@@ -63,8 +68,14 @@ export class VpgoodsreceiptComponent implements OnInit {
     this.router.navigate(['/vinvoice']);
   }
 
-  navToPayment() {
+  navToClosePayment() {
+
+  }
+
+  navToOpenPayment() {
     this.router.navigate(['/vpayment']);
   }
+
+
 
 }

@@ -49,12 +49,12 @@
           <div class="list-group">
             <a
               (click)="navToOpenPayment()"
-              class="list-group-item active list-group-item-action pl-5"
+              class="list-group-item list-group-item-action pl-5"
               >Open</a
             >
             <a
               (click)="navToClosePayment()"
-              class="list-group-item list-group-item-action border-0 pl-5"
+              class="list-group-item active list-group-item-action border-0 pl-5"
               >Closed</a
             >
           </div>
@@ -79,7 +79,7 @@
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
-        <h3>Aging - Open Payments</h3>
+        <h3>Aging - Closed Payments</h3>
         <button class="btn py-0 d-lg-none" id="open-sidebar">
           <span class="bi bi-list text-primary h3"></span>
         </button>
@@ -109,8 +109,8 @@
           <div class="panel" data-ng-controller="validationCtrl">
             <div class="row">
               <div class="col-md-8">
-                <h6>Company Code : {{ vpaymentOData[1].COMP_CODE }}</h6>
-                <h6>Customer ID: {{ vpaymentOData[1].VENDOR }}</h6>
+                <h6>Company Code : {{ vpaymentCData[1].COMP_CODE }}</h6>
+                <h6>Customer ID: {{ vpaymentCData[1].VENDOR }}</h6>
               </div>
               <div class="col-md-4">
                 <input
@@ -142,14 +142,14 @@
                       &nbsp;&nbsp;&nbsp;(Local Cur.)&nbsp;&nbsp;&nbsp;
                     </th>
                     <th>Db./Cr.<br />Indicator</th>
-                    <th>Due Date</th>
+                    <th>Clearing Date</th>
                     <th>Aging</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     *ngFor="
-                      let item of vpaymentOData
+                      let item of vpaymentCData
                         | filter: searchKey
                         | paginate: { itemsPerPage: 6, currentPage: page }
                     "
@@ -160,8 +160,8 @@
                     <td>{{ +item.AMOUNT }} {{ item.CURRENCY }}</td>
                     <td>{{ +item.LC_AMOUNT }} {{ item.LOC_CURRCY }}</td>
                     <td>{{ item.DB_CR_IND === "S" ? "Debit" : "Credit" }}</td>
-                    <td>{{ today | formattedDate }}</td>
-                    <td>{{ item.TAX_CODE }}</td>
+                    <td>{{ item.CLEAR_DATE | formattedDate }}</td>
+                    <td>{{ item.REGION }}</td>
                   </tr>
                 </tbody>
               </table>

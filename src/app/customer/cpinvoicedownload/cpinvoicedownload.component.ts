@@ -65,6 +65,7 @@ export class CpinvoicedownloadComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
+    this.network.logoutClearCache();
     this.router.navigate(['/customer'])
   }
   navToProfile() {

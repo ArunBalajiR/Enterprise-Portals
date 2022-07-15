@@ -30,6 +30,7 @@ get creditData(){
 
 logOut() {
   localStorage.clear();
+  this.network.logoutClearCache();
   this.router.navigate(['/customer'])
 }
 navToProfile() {

@@ -79,7 +79,7 @@ a:hover{
   background-color: #b8aa0e;
 }
 .panel.post:after {
-  content: "\f08d";
+  content: "\f0d6";
   font-size: 200px;
   color: #a5980d;
   top: 45px;
@@ -139,4 +139,15 @@ a:hover{
 
 .dropdown-item {
   text-decoration : none;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  border: none;
 }

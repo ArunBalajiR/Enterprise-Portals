@@ -50,6 +50,20 @@ export class StatesService {
     "S" : "G/L"
 
   };
+
+  invoiceStatus:any={
+    "1": "Planned",
+    "2": "Deleted",
+    "3": "Contains",
+    "4": "Correct",
+    "5": "Posted",
+    "A": "Parked",
+    "B": "Parked",
+    "C": "Held",
+    "D": "Held",
+    "E": "Parked"
+  }
+
   constructor() { }
 
   getRegion(num: any): string {
@@ -60,6 +74,9 @@ export class StatesService {
     return this.koartACType[koart];
   }
 
+  getInvoiceStatus(status:any):string{
+    return this.invoiceStatus[status];
+  }
 }
 
 

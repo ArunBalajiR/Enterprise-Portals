@@ -20,6 +20,7 @@ import { VpgoodsreceiptComponent } from './vendor/vpgoodsreceipt/vpgoodsreceipt.
 import { VpinvoiceComponent } from './vendor/vpinvoice/vpinvoice.component';
 import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoicedownload.component';
 import { VploginComponent } from './vendor/vplogin/vplogin.component';
+import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component';
 import { VppaymentsComponent } from './vendor/vppayments/vppayments.component';
 import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
 import { VppurorderComponent } from './vendor/vppurorder/vppurorder.component';
@@ -126,6 +127,10 @@ const routes: Routes = [
   {
     path: 'vpayment',
     component: VppaymentsComponent
+  },
+  {
+    path: 'vpaymentc',
+    component: VppaymentclComponent
   }
 ];
 

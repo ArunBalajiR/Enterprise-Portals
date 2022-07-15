@@ -24,9 +24,7 @@ export class VploginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public router: Router
-  )
-
-  {
+  ) {
     this.authUser = {
       id: '',
       password: '',
@@ -56,6 +54,8 @@ export class VploginComponent implements OnInit {
 
   }
 
-   ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
 }

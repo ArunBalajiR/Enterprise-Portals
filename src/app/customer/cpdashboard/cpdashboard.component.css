@@ -79,13 +79,13 @@ a:hover{
   background-color: #b8aa0e;
 }
 .panel.post:after {
-  content: "\f08d";
+  content: "\f0d1";
   font-size: 200px;
   color: #a5980d;
   top: 45px;
   right: 60px;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
 }
 .panel.post:hover:after {
   top: 8px;

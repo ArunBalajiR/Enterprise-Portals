@@ -19,7 +19,7 @@ export class VpdashboardComponent implements OnInit {
     public router: Router,
     private network: NetworkService
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -28,25 +28,26 @@ export class VpdashboardComponent implements OnInit {
 
     this.network.getQuotationData(this.vendorId);
     this.network.getPurchaseOrderData(this.vendorId);
-    // this.network.getInquiryData(this.vendorId);
+    this.network.getGoodsReceiptData(this.vendorId);
 
   }
 
-  get goodsreceiptCount(){
-    return this.network.delCount;
+  get goodsreceiptCount() {
+    return this.network.grCount;
   }
 
-  get purchaseorderCount(){
+  get purchaseorderCount() {
     return this.network.poCount;
   }
 
-  get quotationCount(){
+  get quotationCount() {
     return this.network.quotCount;
   }
 
 
 
   logOut() {
+    this.network.logoutClearCache();
     localStorage.clear();
     this.router.navigate(['/vendor'])
   }
@@ -78,11 +79,15 @@ export class VpdashboardComponent implements OnInit {
     this.router.navigate(['/goodsreceipt'])
   }
 
-  navToInvoice(){
+  navToInvoice() {
     this.router.navigate(['/vinvoice']);
   }
 
-  navToPayment(){
+  navToClosePayment() {
+    this.router.navigate(['/vpaymentc']);
+  }
+
+  navToOpenPayment() {
     this.router.navigate(['/vpayment']);
   }
 

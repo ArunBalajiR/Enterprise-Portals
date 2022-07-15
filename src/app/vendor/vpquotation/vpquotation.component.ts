@@ -27,6 +27,7 @@ export class VpquotationComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
+    this.network.logoutClearCache();
     this.router.navigate(['/vendor'])
   }
   navToVendorProfile() {
