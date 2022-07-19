@@ -40,6 +40,7 @@ import { EpprofileComponent } from './employee/epprofile/epprofile.component';
 import { EpdashboardComponent } from './employee/epdashboard/epdashboard.component';
 import { VpquotitemComponent } from './vendor/vpquotitem/vpquotitem.component';
 import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component';
+import { VpgoodsitemsComponent } from './vendor/vpgoodsitems/vpgoodsitems.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component
     EpprofileComponent,
     EpdashboardComponent,
     VpquotitemComponent,
-    VppaymentclComponent
+    VppaymentclComponent,
+    VpgoodsitemsComponent
 
   ],
   imports: [

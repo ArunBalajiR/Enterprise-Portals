@@ -33,7 +33,7 @@ export class VpinvoiceComponent implements OnInit {
 
   previewInvoice(invoiceDetail:any){
     this.sharedData.setInvoie(invoiceDetail);
-    this.router.navigate(['/invpreview'])
+    this.router.navigate(['/vinvpreview'])
   }
 
   logOut() {

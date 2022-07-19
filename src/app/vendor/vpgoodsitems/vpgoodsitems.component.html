@@ -37,7 +37,7 @@
           (click)="navToGoodsReceipt()"
           class="list-group-item active list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-truck"></span>
+          <span class="bi bi-arrow-left-circle"></span>
           <span class="ml-1">Goods Receipt</span>
         </a>
 
@@ -60,7 +60,7 @@
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
-        <h3>Goods Receipt</h3>
+        <h3>Doc Num : {{ goodsReceiptData[0].MAT_DOC}}</h3>
         <button class="btn py-0 d-lg-none" id="open-sidebar">
           <span class="bi bi-list text-primary h3"></span>
         </button>
@@ -110,13 +110,14 @@
                 <thead>
                   <tr>
                     <th>Doc.No.</th>
-                    <th>Doc.Date</th>
-                    <th>Posting Date</th>
-                    <th>Transaction Type</th>
-                    <th>Entered On</th>
+                    <th>PO. No.</th>
+                    <th>Material</th>
+                    <th>Mat.Doc.Item</th>
+                    <th>Plant</th>
+                    <th>PO Item</th>
+                    <th>Quantity</th>
 
-                    <th>Entered By</th>
-                    <th>Items</th>
+                    <th>St.Loc</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -128,20 +129,17 @@
                     "
                   >
                     <td>{{ +item.MAT_DOC }}</td>
-                    <td>{{ item.DOC_DATE | formattedDate }}</td>
-                    <td>{{ item.PSTNG_DATE | formattedDate }}</td>
-                    <td>{{ item.TR_EV_TYPE=== "WE" ? "Goods Receipt" : item.TR_EV_TYPE }}</td>
+                    <td>{{ item.PO_NUMBER }}</td>
+                    <td>{{ +item.MATERIAL  }}</td>
+                    <td>{{ +item.MATDOC_ITM }}</td>
+                    <td>{{ item.PLANT }}</td>
+                    <td>{{ +item.PO_ITEM }}</td>
                     <td>
-                      {{ item.ENTRY_DATE | formattedDate }}
+                      {{ item.PO_PR_QNT }}
                     </td>
-                    <td>{{ item.USERNAME }}</td>
+                    <td>{{ item.STGE_LOC }}</td>
 
-                    <td>
-                      <button (click)="toGoods(item.MAT_DOC)" id="b2" class="icon-button">
-                        <i class="fa fa-list"></i>
-                        <i class="fa fa-info fa--bottom"></i>View Items
-                      </button>
-                    </td>
+
                   </tr>
                 </tbody>
               </table>

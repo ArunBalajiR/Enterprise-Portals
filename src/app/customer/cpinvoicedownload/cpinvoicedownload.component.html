@@ -104,23 +104,27 @@
             <div id="invoice" class="effect2">
               <div id="invoice-top">
                 <div class="logo">
-                  <img
-                    src="../../../assets/img/logo.jpg"
-                    alt="Logo"
-                  />
+                  <img src="../../../assets/img/logo.jpg" alt="Logo" />
                 </div>
                 <div class="title">
                   <h1>
-                    Invoice #<span class="invoiceVal invoice_num"
-                      >{{+invoiceDetail.VBELN}}</span
-                    >
+                    Invoice #<span class="invoiceVal invoice_num">{{
+                      +invoiceDetail.VBELN
+                    }}</span>
                   </h1>
                   <p>
-                    Baseline Payment Date: <span id="gl_date">{{invoiceDetail.ZFBDT | formattedDate}}</span>
+                    Baseline Payment Date:
+                    <span id="gl_date">{{
+                      invoiceDetail.ZFBDT | formattedDate
+                    }}</span>
                     <br />
-                    Last Dunn Date: <span id="invoice_date">{{invoiceDetail.MADAT | formattedDate }}</span
+                    Last Dunn Date:
+                    <span id="invoice_date">{{
+                      invoiceDetail.MADAT | formattedDate
+                    }}</span
                     ><br />
-                    Invoice Date: <span id="gl_date">{{today.toLocaleDateString()}}</span>
+                    Invoice Date:
+                    <span id="gl_date">{{ today.toLocaleDateString() }}</span>
                   </p>
                 </div>
                 <!--End Title-->
@@ -129,14 +133,17 @@
 
               <div id="invoice-mid">
                 <div id="message">
-                  <h2>Hello {{customerProfile.fname}} {{customerProfile.lname}},</h2>
+                  <h2>
+                    Hello {{ customerProfile.fname }}
+                    {{ customerProfile.lname }},
+                  </h2>
                   <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;An invoice with invoice number #<span id="invoice_num"
-                      >{{invoiceDetail.VBELN}}</span
-                    >
+                    &nbsp;&nbsp;&nbsp;&nbsp;An invoice with invoice number
+                    #<span id="invoice_num">{{ invoiceDetail.VBELN }}</span>
                     is created for customer number
-                    <span id="supplier_name">{{customerProfile.id}}</span> on {{today.toLocaleDateString() }}.
-                    This is a computer generated invoice and does not require a physical signature.
+                    <span id="supplier_name">{{ customerProfile.id }}</span> on
+                    {{ today.toLocaleDateString() }}. This is a computer
+                    generated invoice and does not require a physical signature.
                   </p>
                 </div>
                 <div class="clearfix">
@@ -148,15 +155,18 @@
                       />
                     </div>
                     <div class="clientinfo">
-                      <h2 id="supplier">{{customerProfile.fname}} {{customerProfile.lname}}</h2>
+                      <h2 id="supplier">
+                        {{ customerProfile.fname }} {{ customerProfile.lname }}
+                      </h2>
                       <p>
-                        <span
-                          id="city"
-                          >City :{{customerProfile.city}}</span
-                        ><br /><span id="address">Region : {{customerProfile.region}}</span><br />
+                        <span id="city">City :{{ customerProfile.city }}</span
+                        ><br /><span id="address"
+                          >Region : {{ customerProfile.region }}</span
+                        ><br />
                         <span id="country">Zip Code</span> :
-                        <span id="zip">{{customerProfile.postalcode}}</span><br /><span id="tax_num"
-                          >Phone no : {{customerProfile.phone}}</span
+                        <span id="zip">{{ customerProfile.postalcode }}</span
+                        ><br /><span id="tax_num"
+                          >Phone no : {{ customerProfile.phone }}</span
                         ><br />
                       </p>
                     </div>
@@ -165,26 +175,27 @@
                     <table class="table">
                       <tbody>
                         <tr>
-                          <td>
-
-                          </td>
+                          <td></td>
                           <td>
                             <span>Account No : </span
-                            ><label id="currency">{{invoiceDetail.BELNR}}</label>
+                            ><label id="currency">{{
+                              invoiceDetail.BELNR
+                            }}</label>
                           </td>
                         </tr>
                         <tr>
+                          <td></td>
                           <td>
-
-                          </td>
-                          <td>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Account Type</span><label id="currency">{{koart.getACType( invoiceDetail.KOART) }}</label>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Account Type</span
+                            ><label id="currency">{{
+                              koart.getACType(invoiceDetail.KOART)
+                            }}</label>
                           </td>
                         </tr>
                         <tr>
                           <td colspan="2">
-                            <span>Customer Number</span><label id="note">{{+customerProfile.id}}</label>
-
+                            <span>Customer Number</span
+                            ><label id="note">{{ +customerProfile.id }}</label>
                           </td>
                         </tr>
                       </tbody>
@@ -196,45 +207,60 @@
 
               <div id="invoice-bot">
                 <div id="table">
-                <table id="table" class="table table-bordered">
+                  <table id="table" class="table table-bordered">
                     <tbody>
-                        <tr>
-                            <td class="col-md-6">Local Currency Amount</td>
-                            <td class="col-md-2"><i class="fa fa-inr"></i> <b>{{invoiceDetail.DMBTR}} {{ invoiceDetail.PSWSL }}</b></td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-9">General Ledger Amount</td>
-                            <td class="col-md-3"><i class="fa fa-inr"></i><b>{{invoiceDetail.PSWBT}} {{ invoiceDetail.PSWSL }}</b> </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-9">Document Currency Amount</td>
-                            <td class="col-md-3"><i class="fa fa-inr"></i><b>{{invoiceDetail.WRBTR}} {{ invoiceDetail.PSWSL }}</b></td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-9">Total</td>
-                            <td class="col-md-3"><i class="fa fa-inr"></i><h6>{{invoiceDetail.DMBTR}} {{ invoiceDetail.PSWSL }}</h6></td>
-                        </tr>
-
-
+                      <tr>
+                        <td class="col-md-6">Local Currency Amount</td>
+                        <td class="col-md-2">
+                          
+                          <b
+                            >{{ invoiceDetail.DMBTR }}
+                            {{ invoiceDetail.PSWSL }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">General Ledger Amount</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ invoiceDetail.PSWBT }}
+                            {{ invoiceDetail.PSWSL }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Document Currency Amount</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ invoiceDetail.WRBTR }}
+                            {{ invoiceDetail.PSWSL }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Total</td>
+                        <td class="col-md-3">
+                          <h6>
+                            {{ invoiceDetail.DMBTR }} {{ invoiceDetail.PSWSL }}
+                          </h6>
+                        </td>
+                      </tr>
                     </tbody>
-                </table>
+                  </table>
                 </div>
                 <!--End Table-->
                 <div style="height: 50px"></div>
                 <div class="container">
-                  <div class="row" style="justify-content: center;">
+                  <div class="row" style="justify-content: center">
                     <a><h1>Thank you !</h1></a>
-
                   </div>
                 </div>
                 <div class="container">
-                  <div class="row" style="justify-content: center;">
+                  <div class="row" style="justify-content: center">
                     <p>www.kaartech.com</p>
-
                   </div>
                 </div>
                 <div style="height: 50px"></div>
-
               </div>
               <!--End InvoiceBot-->
               <footer>
@@ -242,7 +268,9 @@
                   <p class="col-right">
                     Our mailing address is:
                     <span class="email"
-                      ><a class="invoiceaccent" href="mailto:contact@kaartech.com"
+                      ><a
+                        class="invoiceaccent"
+                        href="mailto:contact@kaartech.com"
                         >contact@kaartech.com</a
                       ></span
                     >
@@ -258,13 +286,12 @@
               <div class="col-md-1"></div>
               <div class="col-md-1"></div>
               <div class="col-md-1">
-                <button id="b2" class="icon-button" (click)="navToInvoice()" >
+                <button id="b2" class="icon-button" (click)="navToInvoice()">
                   <i class="fa fa-ban"></i>
                   <i class="fa fa-arrow-left fa--bottom"></i>Cancel
                 </button>
               </div>
               <div class="col-md-1"></div>
-
 
               <div class="col-md-1">
                 <button id="b2" (click)="generatePDF()" class="icon-button">
@@ -272,7 +299,6 @@
                   <i class="fa fa-file-pdf fa--bottom"></i>Download
                 </button>
               </div>
-
 
               <div class="col-md-1"></div>
               <div class="col-md-1"></div>

@@ -419,7 +419,6 @@ export class NetworkService {
           this.goodsreceiptData = this.goodsreceiptJson.data.GOODSHEAD.item;
           this.goodsreceiptItems = this.goodsreceiptJson.data.GOODSVALUE.item;
           this.goodsreceiptCount = (this.goodsreceiptData.length);
-
         },
         err => {
           console.log(err);
@@ -528,8 +527,8 @@ export class NetworkService {
       this.http.post("http://localhost:5000/vendorinvoicelist", { id: vendorId }).subscribe(
         response => {
           this.isLoading = true;
-          console.log(response);
           this.vinvoiceJson = JSON.parse(JSON.stringify(response));
+          console.log(this.vinvoiceJson.data.INVOICE);
           this.vinvoiceData = this.vinvoiceJson.data.INVOICE.item;
         },
         err => {

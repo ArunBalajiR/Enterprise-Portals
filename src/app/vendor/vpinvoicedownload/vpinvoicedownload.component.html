@@ -1,1 +1,341 @@
-<p>vpinvoicedownload works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <div
+      class="col-md-3 col-lg-2 px-0 position-fixed h-100 bg-white shadow-sm sidebar"
+      id="sidebar"
+    >
+      <img
+        width="100%"
+        class="text-primary d-flex my-4 justify-content-center"
+        src="https://vishnu.edu.in/companylogos/KAAR.PNG"
+      />
+
+      <div class="list-group rounded-0">
+        <a
+          (click)="navToVendorDashboard()"
+          class="list-group-item list-group-item-action border-0 d-flex align-items-center"
+        >
+          <span class="bi bi-grid-1x2"></span>
+          <span class="ml-2">Dashboard</span>
+        </a>
+
+        <a
+          (click)="navToCredit()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-credit-card"></span>
+          <span class="ml-2">Credit</span>
+        </a>
+        <a
+          (click)="navToDebit()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-cash-stack"></span>
+          <span class="ml-2">Debit</span>
+        </a>
+        <button
+          class="list-group-item list-group-item-action border-0 d-flex justify-content-between align-items-center"
+          data-toggle="collapse"
+          data-target="#sale-collapse"
+        >
+          <div>
+            <span class="bi bi-wallet2"></span>
+            <span class="ml-2">Payment</span>
+          </div>
+          <span class="bi bi-chevron-down small"></span>
+        </button>
+        <div class="collapse" id="sale-collapse" data-parent="#sidebar">
+          <div class="list-group">
+            <a
+              (click)="navToOpenPayment()"
+              class="list-group-item list-group-item-action pl-5"
+              >Open</a
+            >
+            <a
+              (click)="navToClosePayment()"
+              class="list-group-item list-group-item-action border-0 pl-5"
+              >Closed</a
+            >
+          </div>
+        </div>
+
+        <a
+          (click)="navToInvoice()"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-receipt"></span>
+          <span class="ml-2">Invoice</span>
+        </a>
+      </div>
+    </div>
+    <!-- overlay to close sidebar on small screens -->
+    <div
+      class="w-100 vh-100 position-fixed overlay d-none"
+      id="sidebar-overlay"
+    ></div>
+    <!-- note: in the layout margin auto is the key as sidebar is fixed -->
+    <div class="col-md-9 col-lg-10 ml-md-auto px-0">
+      <!-- top nav -->
+      <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
+        <!-- close sidebar -->
+        <h3>Invoice Preview</h3>
+        <button class="btn py-0 d-lg-none" id="open-sidebar">
+          <span class="bi bi-list text-primary h3"></span>
+        </button>
+        <div class="dropdown ml-auto">
+          <button
+            class="btn py-0 d-flex align-items-center"
+            id="logout-dropdown"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="bi bi-person text-primary h4"></span>
+            <span class="bi bi-chevron-down ml-1 mb-2 small"></span>
+          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right border-0 shadow-sm"
+            aria-labelledby="logout-dropdown"
+          >
+            <a class="dropdown-item" (click)="navToVendorProfile()">Profile</a>
+            <a class="dropdown-item" (click)="logOut()">Logout</a>
+          </div>
+        </div>
+      </nav>
+      <!-- main content -->
+      <main class="container-fluid">
+        <body>
+          <div id="invoiceholder">
+            <div id="invoice" class="effect2">
+              <div id="invoice-top">
+                <div class="logo">
+                  <img src="../../../assets/img/logo.jpg" alt="Logo" />
+                </div>
+                <div class="title">
+                  <h1>
+                    Invoice #<span class="invoiceVal invoice_num">{{
+                      +invoiceDetail.BELNR
+                    }}</span>
+                  </h1>
+                  <p>
+                    Baseline Payment Date:
+                    <span id="gl_date">{{
+                      invoiceDetail.BLDAT | formattedDate
+                    }}</span>
+                    <br />
+                    Document Date:
+                    <span id="invoice_date">{{
+                      invoiceDetail.CPUDT | formattedDate
+                    }}</span
+                    ><br />
+                    Invoice Date:
+                    <span id="gl_date">{{ today.toLocaleDateString() }}</span>
+                  </p>
+                </div>
+                <!--End Title-->
+              </div>
+              <!--End InvoiceTop-->
+
+              <div id="invoice-mid">
+                <div id="message">
+                  <h2>
+                    Hello {{ vendorProfile.fname }}
+                    {{ vendorProfile.lname }},
+                  </h2>
+                  <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;An invoice with invoice number
+                    #<span id="invoice_num">{{ invoiceDetail.BELNR }}</span>
+                    is created for vendor ID
+                    <span id="supplier_name">{{ vendorProfile.id }}</span> on
+                    {{ today.toLocaleDateString() }}. This is a computer
+                    generated invoice and does not require a physical signature.
+                  </p>
+                </div>
+                <div class="clearfix">
+                  <div class="col-left">
+                    <div class="clientlogo">
+                      <img
+                        src="https://cdn3.iconfinder.com/data/icons/daily-sales/512/Sale-card-address-512.png"
+                        alt="Sup"
+                      />
+                    </div>
+                    <div class="clientinfo">
+                      <h2 id="supplier">
+                        {{ vendorProfile.fname }} {{ vendorProfile.lname }}
+                      </h2>
+                      <p>
+                        <span>Street : {{ vendorProfile.street }}</span><br />
+                        <span id="city">City :{{ vendorProfile.city }}</span
+                        ><br /><span id="address"
+                          >Country : {{ vendorProfile.country }}</span
+                        ><br />
+                        <span id="country">Zip Code</span> :
+                        <span id="zip">{{ vendorProfile.postalcode }}</span
+                        ><br /><span id="tax_num"
+                          >Phone no : {{ vendorProfile.phone }}</span
+                        ><br />
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-right">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <span>Account No : </span
+                            ><label id="currency">{{
+                              invoiceDetail.BELNR
+                            }}</label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Account Type</span
+                            ><label id="currency"> Vendor </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <span>Vendor ID</span
+                            ><label id="note">{{ vendorProfile.id }}</label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--End Invoice Mid-->
+
+              <div id="invoice-bot">
+                <div id="table">
+                  <table id="table" class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <td class="col-md-6">Exchange Rate</td>
+                        <td class="col-md-2">
+
+                          <b
+                            >{{ invoiceDetail.KURSF }}
+                            {{ invoiceDetail.WAERS }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Tax Translation Rate</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ invoiceDetail.TXKRS }}
+                            {{ invoiceDetail.WAERS }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Gross Amount</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ invoiceDetail.RMWWR }}
+                            {{ invoiceDetail.WAERS }}</b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Cash Discount Percentage I</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ +invoiceDetail.ZBD1P }} %
+                            </b
+                          >
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="col-md-9">Cash Discount Percentage II</td>
+                        <td class="col-md-3">
+                          <b
+                            >{{ +invoiceDetail.ZBD2P }} %
+                            </b
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-9">Total Gross Amount</td>
+                        <td class="col-md-3">
+                          <h6>
+                            {{ invoiceDetail.RMWWR }} {{ invoiceDetail.WAERS }}
+                          </h6>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!--End Table-->
+                <div style="height: 50px"></div>
+                <div class="container">
+                  <div class="row" style="justify-content: center">
+                    <a><h1>Thank you !</h1></a>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row" style="justify-content: center">
+                    <p>www.kaartech.com</p>
+                  </div>
+                </div>
+                <div style="height: 50px"></div>
+              </div>
+              <!--End InvoiceBot-->
+              <footer>
+                <div id="legalcopy" class="clearfix">
+                  <p class="col-right">
+                    Our mailing address is:
+                    <span class="email"
+                      ><a
+                        class="invoiceaccent"
+                        href="mailto:contact@kaartech.com"
+                        >contact@kaartech.com</a
+                      ></span
+                    >
+                  </p>
+                </div>
+              </footer>
+            </div>
+            <!--End Invoice-->
+            <div style="height: 50px"></div>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1">
+                <button id="b2" class="icon-button" (click)="navToInvoice()">
+                  <i class="fa fa-ban"></i>
+                  <i class="fa fa-arrow-left fa--bottom"></i>Cancel
+                </button>
+              </div>
+              <div class="col-md-1"></div>
+
+              <div class="col-md-1">
+                <button id="b2" (click)="generatePDF()" class="icon-button">
+                  <i class="fa fa-download"></i>
+                  <i class="fa fa-file-pdf fa--bottom"></i>Download
+                </button>
+              </div>
+
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+            </div>
+            <div style="height: 50px"></div>
+          </div>
+          <!-- End Invoice Holder-->
+        </body>
+      </main>
+
+      <div class="fixed-bottom">
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</div>

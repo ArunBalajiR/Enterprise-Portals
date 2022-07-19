@@ -705,11 +705,14 @@ app.post('/vendorprofile',(req,res)=>{
 app.post('/vendorinvoicelist',(req,res)=>{
   let id = req.body.id;
   var invoiceBody = `<?xml version="1.0" encoding="UTF-8"?>
-  <ns0:ZINVOICELIST_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
-     <VENDORID>${id}</VENDORID>
-  </ns0:ZINVOICELIST_FM>`;
+  <ns0:ZPIPO_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID/>
+     <ID>${id}</ID>
+     <PS_PDF/>
+     <STATUS>VENINV</STATUS>
+  </ns0:ZPIPO_FM>`;
   console.log("Vendor Invoice List Call");
-  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/getvendorinvoicelistbyarun')
+  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeportaldatabyarun')
   .headers({
     'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
     'Content-Type' : 'text/xml'
@@ -720,7 +723,7 @@ app.post('/vendorinvoicelist',(req,res)=>{
       console.log('Unable to fetch Vendor Invoice List data');
       console.log(result.body);
       res.json({ success : false, message : "No records found"});
-    }else if(result.body.RETURN){
+    }else if(result.body.INVOICE === ""){
       console.log('Unable to fetch Vendor Invoice List data');
       res.json({ success : false, message : "No records found"});
     }
@@ -732,141 +735,6 @@ app.post('/vendorinvoicelist',(req,res)=>{
 
 });
 
-// VENDOR INVOICE DETAIL
-app.post('/vendorinvoicedetail',(req,res)=>{
-  let id = req.body.id;
-  var invoicedetailBody = `<?xml version="1.0" encoding="UTF-8"?>
-  <ns0:ZINVOICEDETAIL_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
-     <INVOICENUMBER>${id}</INVOICENUMBER>
-     <INVOICEDETAIL>
-        <item>
-           <MANDT/>
-           <BELNR/>
-           <GJAHR/>
-           <BUZEI/>
-           <EBELN/>
-           <EBELP/>
-           <ZEKKN/>
-           <MATNR/>
-           <BWKEY/>
-           <BWTAR/>
-           <BUKRS/>
-           <WERKS/>
-           <WRBTR/>
-           <SHKZG/>
-           <MWSKZ/>
-           <TXJCD/>
-           <MENGE/>
-           <BSTME/>
-           <BPMNG/>
-           <BPRME/>
-           <LBKUM/>
-           <VRKUM/>
-           <MEINS/>
-           <PSTYP/>
-           <KNTTP/>
-           <BKLAS/>
-           <EREKZ/>
-           <EXKBE/>
-           <XEKBZ/>
-           <TBTKZ/>
-           <SPGRP/>
-           <SPGRM/>
-           <SPGRT/>
-           <SPGRG/>
-           <SPGRV/>
-           <SPGRQ/>
-           <SPGRS/>
-           <SPGRC/>
-           <SPGREXT/>
-           <BUSTW/>
-           <XBLNR/>
-           <XRUEB/>
-           <BNKAN/>
-           <KSCHL/>
-           <SALK3/>
-           <VMSAL/>
-           <XLIFO/>
-           <LFBNR/>
-           <LFGJA/>
-           <LFPOS/>
-           <MATBF/>
-           <RBMNG/>
-           <BPRBM/>
-           <RBWWR/>
-           <LFEHL/>
-           <GRICD/>
-           <GRIRG/>
-           <GITYP/>
-           <PACKNO/>
-           <INTROW/>
-           <SGTXT/>
-           <XSKRL/>
-           <KZMEK/>
-           <MRMOK/>
-           <STUNR/>
-           <ZAEHK/>
-           <STOCK_POSTING/>
-           <STOCK_POSTING_PP/>
-           <STOCK_POSTING_PY/>
-           <WEREC/>
-           <LIFNR/>
-           <FRBNR/>
-           <XHISTMA/>
-           <COMPLAINT_REASON/>
-           <RETAMT_FC/>
-           <RETPC/>
-           <RETDUEDT/>
-           <XRETTAXNET/>
-           <RE_ACCOUNT/>
-           <ERP_CONTRACT_ID/>
-           <ERP_CONTRACT_ITM/>
-           <SRM_CONTRACT_ID/>
-           <SRM_CONTRACT_ITM/>
-           <CONT_PSTYP/>
-           <SRVMAPKEY/>
-           <CHARG/>
-           <INV_ITM_ORIGIN/>
-           <INVREL/>
-           <XDINV/>
-           <DIFF_AMOUNT/>
-           <XCPRF/>
-           <FSH_SEASON_YEAR/>
-           <FSH_SEASON/>
-           <FSH_COLLECTION/>
-           <FSH_THEME/>
-           <LICNO/>
-           <ZEILE/>
-           <SGT_SCAT/>
-           <WRF_CHARSTC1/>
-           <WRF_CHARSTC2/>
-           <WRF_CHARSTC3/>
-        </item>
-     </INVOICEDETAIL>
-  </ns0:ZINVOICEDETAIL_FM>`;
-  console.log(`Vendor Invoice Data ${id} Call`);
-  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/getvendorinvoicebyarun')
-  .headers({
-    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
-    'Content-Type' : 'text/xml'
-  })
-  .send(invoicedetailBody)
-  .end(function(result){
-    if(result.error){
-      console.log(`Unable to fetch Invoice Detail ${id} data`);
-      console.log(result.body);
-      res.json({ success : false, message : "No records found"});
-    }else if(!result.body.INVOICEDETAIL){
-      console.log(`Unable to fetch Invoice Detail ${id} data`);
-      res.json({ success : false, message : "No records found"});
-    }
-    else{
-      res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
-    }
-
-  })
-
-});
 
 //VENDOR GOODS RECEIPT
 app.post('/vendorgoodsreceipt',(req,res)=>{
@@ -1876,6 +1744,42 @@ app.post('/vendorpo',(req,res)=>{
   })
 
 });
+
+//-----EMPLOYEE PORTAL-------------
+//EMPLOGIN
+app.post('/emplogin',(req,res)=>{
+  let id = req.body.id;
+  let pwd = req.body.password;
+  var emploginBody = `<?xml version="1.0" encoding="UTF-8"?>
+  <ns0:ZEMPLOGIN_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID>${id}</EMPID>
+     <PASSWORD>${pwd}</PASSWORD>
+  </ns0:ZEMPLOGIN_FM>`;
+  console.log("Employee Login Call")
+  var req = unirest('POST','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeauthbyarun')
+  .headers({
+    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
+    'Content-Type' : 'text/xml'
+  })
+  .send(emploginBody)
+  .end(function(result){
+    if(result.error){
+      console.log('Unable to fetch Emp login data');
+      res.json({ success : false, message : "Check your credentials once"});
+    }else if(result.body.RESULT === 'WRONG CREDENTIALS'){
+      console.log('Unable to fetch Emp Login data');
+      res.json({ success : false, message : "Check your credentials once"});
+    }
+    else{
+      res.status(200).json({success : true, message : "User Authenticated Successfully", data: result.body});
+    }
+
+  })
+
+});
+
+//OVERALL EMPLOYEE DATA AND VENDOR INVOICE DATA
+
 
 //IF NOT FOUND
 app.use((req, res, next) => {

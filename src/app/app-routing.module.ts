@@ -16,6 +16,7 @@ import { AuthGuard } from './services/auth.guard';
 import { VpcreditComponent } from './vendor/vpcredit/vpcredit.component';
 import { VpdashboardComponent } from './vendor/vpdashboard/vpdashboard.component';
 import { VpdebitComponent } from './vendor/vpdebit/vpdebit.component';
+import { VpgoodsitemsComponent } from './vendor/vpgoodsitems/vpgoodsitems.component';
 import { VpgoodsreceiptComponent } from './vendor/vpgoodsreceipt/vpgoodsreceipt.component';
 import { VpinvoiceComponent } from './vendor/vpinvoice/vpinvoice.component';
 import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoicedownload.component';
@@ -106,6 +107,10 @@ const routes: Routes = [
     path: 'goodsreceipt',
     component: VpgoodsreceiptComponent,
 
+  },
+  {
+    path: 'vgoodsitems',
+    component: VpgoodsitemsComponent
   },
   {
     path: 'vinvoice',

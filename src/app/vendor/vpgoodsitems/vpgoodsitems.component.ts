@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { NetworkService } from 'src/app/services/network.service';
 import { ShareddataService } from 'src/app/services/shareddata.service';
 
-
 @Component({
-  selector: 'app-vpgoodsreceipt',
-  templateUrl: './vpgoodsreceipt.component.html',
-  styleUrls: ['./vpgoodsreceipt.component.css']
+  selector: 'app-vpgoodsitems',
+  templateUrl: './vpgoodsitems.component.html',
+  styleUrls: ['./vpgoodsitems.component.css']
 })
-export class VpgoodsreceiptComponent implements OnInit {
+export class VpgoodsitemsComponent implements OnInit {
 
   searchKey: any;
   vendorId: any;
@@ -18,20 +17,23 @@ export class VpgoodsreceiptComponent implements OnInit {
   constructor(
     public router: Router,
     public network: NetworkService,
-    public sharedData : ShareddataService
-    ) { }
+    public sharedData: ShareddataService
+  ) { }
+
+
 
   ngOnInit(): void {
-    this.vendorId = localStorage.getItem("vendorId");
-    this.network.getGoodsReceiptData(this.vendorId);
+    this.vendorId = localStorage.getItem('vendorId');
+    // this.network.getVProfileData(this.vendorId);
+    // this.network.getGoodsReceiptData(this.vendorId);
   }
 
   get goodsReceiptData() {
-    return this.network.grHeaderData;
+    return this.sharedData.getGrItems;
   }
 
 
-  toGoods(goodsDocNum:any){
+  toGoods(goodsDocNum: any) {
     this.sharedData.setGrNum(goodsDocNum);
     this.router.navigate(['/vgoodsitems']);
   }
@@ -76,5 +78,6 @@ export class VpgoodsreceiptComponent implements OnInit {
   navToPayment() {
     this.router.navigate(['/vpayment']);
   }
+
 
 }

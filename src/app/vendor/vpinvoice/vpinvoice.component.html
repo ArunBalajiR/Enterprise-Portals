@@ -45,7 +45,7 @@
           </div>
           <span class="bi bi-chevron-down small"></span>
         </button>
-        <div id="sale-collapse" data-parent="#sidebar">
+        <div class="collapse" id="sale-collapse" data-parent="#sidebar">
           <div class="list-group">
             <a
               (click)="navToOpenPayment()"
@@ -109,7 +109,7 @@
             <div class="row">
               <div class="col-md-8">
                 <h6>Customer : {{ vendorId }}</h6>
-                <h6>Company Code : {{ vinvoiceData[1].COMP_CODE }}</h6>
+                <h6>Company Code : {{ vinvoiceData[1].BUKRS }}</h6>
               </div>
               <div class="col-md-4">
                 <input
@@ -146,12 +146,12 @@
                         | paginate: { itemsPerPage: 5, currentPage: page }
                     "
                   >
-                    <td>{{ +item.INV_DOC_NO }}</td>
-                    <td>{{ item.DOC_DATE | formattedDate }}</td>
-                    <td>{{ item.ENTRY_TIME }}</td>
-                    <td>{{ item.FISC_YEAR }}</td>
-                    <td>{{ +item.GROSS_AMNT }} {{ item.CURRENCY }}</td>
-                    <td>{{ status.getInvoiceStatus(item.INVOICE_STATUS) }}</td>
+                    <td>{{ +item.BELNR }}</td>
+                    <td>{{ item.BUDAT | formattedDate }}</td>
+                    <td>{{ item.CPUTM }}</td>
+                    <td>{{ item.GJAHR }}</td>
+                    <td>{{ +item.RMWWR }} {{ item.WAERS }}</td>
+                    <td>{{ status.getInvoiceStatus(item.RBSTAT) }}</td>
 
                     <td>
                       <button
