@@ -62,7 +62,7 @@ export class VpgoodsreceiptComponent implements OnInit {
   }
 
   navToPurchaseOrder() {
-
+    this.router.navigate(['/po'])
   }
 
   navToGoodsReceipt() {

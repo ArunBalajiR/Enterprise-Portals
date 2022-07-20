@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NetworkService } from 'src/app/services/network.service';
-
 @Component({
   selector: 'app-vpdashboard',
   templateUrl: './vpdashboard.component.html',
@@ -17,7 +16,8 @@ export class VpdashboardComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public router: Router,
-    private network: NetworkService
+    private network: NetworkService,
+
 
   ) { }
 
@@ -68,7 +68,12 @@ export class VpdashboardComponent implements OnInit {
   }
 
   navToQuotation() {
-    this.router.navigate(['/quotation'])
+    if (!this.network.isEmpty) {
+      this.router.navigate(['/quotation'])
+    } else {
+      alert("No Quotations Found");
+    }
+
   }
 
   navToPurchaseOrder() {

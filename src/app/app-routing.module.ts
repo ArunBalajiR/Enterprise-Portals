@@ -23,9 +23,12 @@ import { VpinvoicedownloadComponent } from './vendor/vpinvoicedownload/vpinvoice
 import { VploginComponent } from './vendor/vplogin/vplogin.component';
 import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component';
 import { VppaymentsComponent } from './vendor/vppayments/vppayments.component';
+import { VppoitemsComponent } from './vendor/vppoitems/vppoitems.component';
 import { VpprofileComponent } from './vendor/vpprofile/vpprofile.component';
 import { VppurorderComponent } from './vendor/vppurorder/vppurorder.component';
 import { VpquotationComponent } from './vendor/vpquotation/vpquotation.component';
+import { VpquotitemComponent } from './vendor/vpquotitem/vpquotitem.component';
+
 
 const routes: Routes = [
   {
@@ -99,9 +102,18 @@ const routes: Routes = [
 
   },
   {
+    path: 'quotationitems',
+    component: VpquotitemComponent,
+
+  },
+  {
     path: 'po',
     component: VppurorderComponent,
 
+  },
+  {
+    path: 'vpoitems',
+    component : VppoitemsComponent
   },
   {
     path: 'goodsreceipt',

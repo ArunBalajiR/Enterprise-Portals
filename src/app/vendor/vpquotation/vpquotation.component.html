@@ -129,7 +129,7 @@
                     <td>{{ item.INCOTERMS1 ==="" ? "-" : item.INCOTERMS1 }}</td>
                     <td>{{ item.QUOT_DEAD | formattedDate }}</td>
 
-                    <td><button
+                    <td><button (click)="gotoRFC(item.PO_NUMBER)"
                       id="b2" class="icon-button">
                       <i class="fa fa-list"></i>
                       <i class="fa fa-info fa--bottom"></i>View Items</button></td>

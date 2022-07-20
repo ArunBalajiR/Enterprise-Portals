@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NetworkService } from 'src/app/services/network.service';
+import { ShareddataService } from 'src/app/services/shareddata.service';
 
 @Component({
   selector: 'app-vppurorder',
@@ -13,7 +14,12 @@ export class VppurorderComponent implements OnInit {
   vendorId: any;
 
   page: number = 1;
-  constructor(public router: Router, public network: NetworkService) { }
+  constructor(
+    public router: Router,
+    public network: NetworkService,
+    public sharedData:ShareddataService
+
+    ) { }
 
   ngOnInit(): void {
     this.vendorId = localStorage.getItem("vendorId");
@@ -24,6 +30,10 @@ export class VppurorderComponent implements OnInit {
     return this.network.poData;
   }
 
+  gotoPoitems(poNumber:any){
+    this.sharedData.setPoNum(poNumber);
+    this.router.navigate(['/vpoitems']);
+  }
 
   logOut() {
     localStorage.clear();

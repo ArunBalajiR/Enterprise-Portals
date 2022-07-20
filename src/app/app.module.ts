@@ -13,7 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { CpprofileComponent } from './customer/cpprofile/cpprofile.component';
 import { StyleDirective } from 'src/app/services/style.directive';
 import { CpdeliveryComponent } from './customer/cpdelivery/cpdelivery.component';
-import {  Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CpinquiryComponent } from './customer/cpinquiry/cpinquiry.component';
@@ -41,6 +41,8 @@ import { EpdashboardComponent } from './employee/epdashboard/epdashboard.compone
 import { VpquotitemComponent } from './vendor/vpquotitem/vpquotitem.component';
 import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component';
 import { VpgoodsitemsComponent } from './vendor/vpgoodsitems/vpgoodsitems.component';
+import { VppoitemsComponent } from './vendor/vppoitems/vppoitems.component';
+
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { VpgoodsitemsComponent } from './vendor/vpgoodsitems/vpgoodsitems.compon
     EpdashboardComponent,
     VpquotitemComponent,
     VppaymentclComponent,
-    VpgoodsitemsComponent
+    VpgoodsitemsComponent,
+    VppoitemsComponent,
+
 
   ],
   imports: [

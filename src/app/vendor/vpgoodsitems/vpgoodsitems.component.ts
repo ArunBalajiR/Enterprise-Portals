@@ -63,8 +63,9 @@ export class VpgoodsitemsComponent implements OnInit {
     this.router.navigate(['/quotation'])
   }
 
-  navToPurchaseOrder() {
 
+  navToPurchaseOrder() {
+    this.router.navigate(['/po'])
   }
 
   navToGoodsReceipt() {

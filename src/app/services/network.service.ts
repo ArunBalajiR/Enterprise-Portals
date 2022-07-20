@@ -40,11 +40,15 @@ export class NetworkService {
   private quotationJson: any;
   private quotationCount: number = 0;
   private quotationArray: any = [];
+  private quotationFItems: any = [];
+  quotationItems: any;
 
   private purchaseorderData: any;
   private purchaseorderJson: any;
   private purchaseorderCount: number = 0;
   private purchaseorderArray: any = [];
+  private purchaseorderItems: any;
+  private purchaseorderItemArray: any = [];
 
   private goodsreceiptData: any;
   private goodsreceiptItems: any;
@@ -72,6 +76,8 @@ export class NetworkService {
 
 
   public isLoading: boolean = false;
+  public isObject: boolean = false;
+
   constructor(private http: HttpClient, private states: StatesService) { }
 
   //Customer PROFILE
@@ -354,12 +360,20 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.quotationJson = JSON.parse(JSON.stringify(response));
-          this.quotationData = this.quotationJson.data.RFQ_HEAD.item;
-          let k = 0;
-          for (let i = 1; i < this.quotationData.length; i++) {
-            this.quotationArray[k++] = this.quotationData[i];
+          this.isObject = (typeof this.quotationJson.data.RFQ_HEAD) === "object";
+          if (!this.isObject) {
+            this.quotationData = this.quotationJson.data.RFQ_HEAD.item;
+            this.quotationItems = this.quotationJson.data.RFQ_VALUES.item;
+            let k = 0;
+            for (let i = 1; i < this.quotationData.length; i++) {
+              this.quotationArray[k++] = this.quotationData[i];
+            }
+            this.quotationCount = (this.quotationArray.length);
+            let r = 0;
+            for (let j = 1; j < this.quotationItems.length; j++) {
+              this.quotationFItems[r++] = this.quotationItems[j];
+            }
           }
-          this.quotationCount = (this.quotationArray.length);
 
         },
         err => {
@@ -371,6 +385,10 @@ export class NetworkService {
 
   get quotData() {
     return this.quotationArray;
+  }
+
+  get quotDataItems() {
+    return this.quotationFItems;
   }
 
   get quotCount() {
@@ -385,10 +403,15 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.purchaseorderJson = JSON.parse(JSON.stringify(response));
-          this.purchaseorderData = this.purchaseorderJson.data.ITEMDATA.item;
+          this.purchaseorderData = this.purchaseorderJson.data.HEADERDATA.item;
+          this.purchaseorderItems = this.purchaseorderJson.data.ITEMDATA.item;
           let k = 0;
           for (let i = 1; i < this.purchaseorderData.length; i++) {
             this.purchaseorderArray[k++] = this.purchaseorderData[i];
+          }
+          let j = 0;
+          for (let n = 1; n < this.purchaseorderItems.length; n++) {
+            this.purchaseorderItemArray[j++] = this.purchaseorderItems[n];
           }
           this.purchaseorderCount = (this.purchaseorderArray.length);
 
@@ -402,6 +425,10 @@ export class NetworkService {
 
   get poData() {
     return this.purchaseorderArray;
+  }
+
+  get poItem() {
+    return this.purchaseorderItems;
   }
 
   get poCount() {
@@ -542,28 +569,42 @@ export class NetworkService {
     return this.vinvoiceData;
   }
 
+  get isEmpty() {
+    return this.isObject;
+  }
+
+  setEmpty() {
+    this.isObject = true;
+  }
+
   logoutClearCache() {
-    //customer
-  this.inquiryData=null;
-  this.inquiryCount= 0;
-  this.saleorderData=null;
-  this.saleorderCount= 0;
-  this.deliveryData=null;
-  this.deliveryCount= 0;
-  this.creditData=null;
-  this.debitData=null;
-  this.paymentData=null;
-  this.invoiceData=null;
-  //vendor
-  this.quotationData = null;
-  this.purchaseorderData = null;
-  this.goodsreceiptData = null;
-  this.quotationCount = 0;
-  this.purchaseorderCount = 0;
-  this.goodsreceiptCount = 0;
-  this.vcreditData=null;
-  this.vdebitData=null;
-  this.vpaymentData=null;
+    // //customer
+    // this.inquiryData = null;
+    // this.inquiryCount = 0;
+    // this.saleorderData = null;
+    // this.saleorderCount = 0;
+    // this.deliveryData = null;
+    // this.deliveryCount = 0;
+    // this.creditData = null;
+    // this.debitData = null;
+    // this.paymentData = null;
+    // this.invoiceData = null;
+    // //vendor
+    // this.quotationData = null;
+    // this.purchaseorderData = null;
+    // this.goodsreceiptData = null;
+    // this.quotationCount = 0;
+    // this.purchaseorderCount = 0;
+    // this.goodsreceiptCount = 0;
+    // this.vcreditData = null;
+    // this.vdebitData = null;
+    // this.vpaymentData = null;
+    // this.quotationArray = null;
+    // this.quotationFItems = null;
+    // this.purchaseorderArray = null;
+    // this.purchaseorderItems = null;
+    // this.goodsreceiptData = null;
+    // this.goodsreceiptItems = null;
   }
 
 

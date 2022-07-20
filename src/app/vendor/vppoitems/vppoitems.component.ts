@@ -4,11 +4,11 @@ import { NetworkService } from 'src/app/services/network.service';
 import { ShareddataService } from 'src/app/services/shareddata.service';
 
 @Component({
-  selector: 'app-vpquotitem',
-  templateUrl: './vpquotitem.component.html',
-  styleUrls: ['./vpquotitem.component.css']
+  selector: 'app-vppoitems',
+  templateUrl: './vppoitems.component.html',
+  styleUrls: ['./vppoitems.component.css']
 })
-export class VpquotitemComponent implements OnInit {
+export class VppoitemsComponent implements OnInit {
 
   searchKey: any;
   vendorId: any;
@@ -17,20 +17,20 @@ export class VpquotitemComponent implements OnInit {
   constructor(
     public router: Router,
     public network: NetworkService,
-    public sharedData:ShareddataService
+    public sharedData: ShareddataService
+  ) { }
 
-    ) { }
+
 
   ngOnInit(): void {
-    this.vendorId = localStorage.getItem("vendorId");
-    this.network.getPurchaseOrderData(this.vendorId);
+    this.vendorId = localStorage.getItem('vendorId');
+    // this.network.getVProfileData(this.vendorId);
+    // this.network.getGoodsReceiptData(this.vendorId);
   }
 
-  
-  get qtData() {
-    return this.sharedData.getQtItems;
+  get poData() {
+    return this.sharedData.getPoItems;
   }
-
 
 
   logOut() {
@@ -58,8 +58,9 @@ export class VpquotitemComponent implements OnInit {
     this.router.navigate(['/quotation'])
   }
 
-  navToPurchaseOrder() {
 
+  navToPurchaseOrder() {
+    this.router.navigate(['/po'])
   }
 
   navToGoodsReceipt() {

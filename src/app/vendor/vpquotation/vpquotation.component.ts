@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NetworkService } from 'src/app/services/network.service';
+import { ShareddataService } from 'src/app/services/shareddata.service';
 
 @Component({
   selector: 'app-vpquotation',
@@ -13,7 +14,12 @@ export class VpquotationComponent implements OnInit {
   vendorId: any;
 
   page: number = 1;
-  constructor(public router: Router, public network: NetworkService) { }
+
+  constructor(
+    public router: Router,
+    public network: NetworkService,
+    public sharedData: ShareddataService
+  ) { }
 
   ngOnInit(): void {
     this.vendorId = localStorage.getItem("vendorId");
@@ -46,8 +52,13 @@ export class VpquotationComponent implements OnInit {
     this.router.navigate(['/vdebit'])
   }
 
-  navToQuotation() {
+  gotoRFC(poNumber: any) {
+    this.sharedData.setQPoNum(poNumber);
+    this.router.navigate(['/quotationitems']);
+  }
 
+  navToQuotation() {
+    this.router.navigate(['/quotation']);
   }
 
   navToPurchaseOrder() {

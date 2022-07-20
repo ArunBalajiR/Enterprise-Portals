@@ -20,27 +20,26 @@
           <span class="ml-2">Dashboard</span>
         </a>
         <a
-        (click)="navToQuotation()"
+          (click)="navToQuotation()"
           class="list-group-item list-group-item-action border-0 align-items-center"
         >
           <span class="bi bi-file-earmark-spreadsheet"></span>
           <span class="ml-2">Quotation</span>
         </a>
         <a
-        (click)="navToPurchaseOrder()"
-          class="list-group-item  active list-group-item-action border-0 align-items-center"
+          (click)="navToPurchaseOrder()"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
         >
           <span class="bi bi-file-earmark-text"></span>
           <span class="ml-1">Pur. Order</span>
         </a>
         <a
-        (click)="navToGoodsReceipt()"
-          class="list-group-item  list-group-item-action border-0 align-items-center"
+          (click)="navToGoodsReceipt()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
         >
           <span class="bi bi-truck"></span>
           <span class="ml-1">Goods Receipt</span>
         </a>
-
 
         <a
           (click)="logOut()"
@@ -58,7 +57,6 @@
     ></div>
     <!-- note: in the layout margin auto is the key as sidebar is fixed -->
     <div class="col-md-9 col-lg-10 ml-md-auto px-0">
-
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
@@ -91,7 +89,7 @@
           <div class="panel" data-ng-controller="validationCtrl">
             <div class="row">
               <div class="col-md-8">
-                <h6>Vendor A/c Num.: {{ purchaseorderData[1].VENDOR }}</h6>
+                <h6>Vendor ID.: {{ vendorId }}</h6>
                 <h6>Company Code: {{ purchaseorderData[1].CO_CODE }}</h6>
               </div>
               <div class="col-md-4">
@@ -113,67 +111,74 @@
                 <thead>
                   <tr>
                     <th>PO.No.</th>
-                    <th>Pur. Material</th>
-                    <th>Unit</th>
+                    <th>Doc.Date</th>
+                    <th>Customer</th>
                     <th>Exchange Rate</th>
-                    <th>Incoterms</th>
-                    <th>Deadline</th>
+                    <th>Export No.</th>
                     <th>Items</th>
-
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of purchaseorderData| filter:searchKey | paginate:{itemsPerPage:6,currentPage:page}">
+                  <tr
+                    *ngFor="
+                      let item of purchaseorderData
+                        | filter: searchKey
+                        | paginate: { itemsPerPage: 6, currentPage: page }
+                    "
+                  >
                     <td>{{ +item.PO_NUMBER }}</td>
-                    <td>{{ +item.PUR_MAT}}</td>
-                    <td>{{ item.BASE_UNIT }}</td>
-                    <td>{{ item.EXCH_RATE }} {{item.CURRENCY }}</td>
-                    <td>{{ item.INCOTERMS1 ==="" ? "-" : item.INCOTERMS1 }}</td>
-                    <td>{{ item.QUOT_DEAD | formattedDate }}</td>
-
-                    <td><button
-                      id="b2" class="icon-button">
-                      <i class="fa fa-list"></i>
-                      <i class="fa fa-info fa--bottom"></i>View Items</button></td>
-
+                    <td>{{ item.DOC_DATE | formattedDate }}</td>
+                    <td>{{ +item.CUSTOMER }}</td>
+                    <td>{{ +item.EXCH_RATE }} {{ item.CURRENCY }}</td>
+                    <td>
+                      {{ +item.EXPORT_NO }}
+                    </td>
+                    <td>
+                      <button (click)="gotoPoitems(item.PO_NUMBER)" id="b2" class="icon-button">
+                        <i class="fa fa-list"></i>
+                        <i class="fa fa-info fa--bottom"></i>View Items
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-
-
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <div class="row h-100">
-
               <div class="col-sm-12 align-self-center">
-                  <div class="container" id="spincontainer">
-                    <div class="row h-100">
-                      <div class="w-25 mx-auto">
-                        <div class="spinner-border text-primary spin"  style="width: 3rem; height: 3rem;"role="status" [hidden]="network.isLoading"></div>
-                      </div>
+                <div class="container" id="spincontainer">
+                  <div class="row h-100">
+                    <div class="w-25 mx-auto">
+                      <div
+                        class="spinner-border text-primary spin"
+                        style="width: 3rem; height: 3rem"
+                        role="status"
+                        [hidden]="network.isLoading"
+                      ></div>
+                    </div>
                   </div>
-                    <!-- <div class="w-25 mx-auto">
+                  <!-- <div class="w-25 mx-auto">
                       <div class="spinner-border text-primary spin"  style="width: 3rem; height: 3rem;"role="status" [hidden]="isLoading"></div>
                     </div> -->
-                  </div>
+                </div>
 
-                  <pagination-controls (pageChange)="page=$event"></pagination-controls>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <h3>&nbsp;</h3>
-                    </div>
-                    <div class="col-md-4">
-                      <h3>&nbsp;</h3>
-                    </div>
+                <pagination-controls
+                  (pageChange)="page = $event"
+                ></pagination-controls>
+                <div class="row">
+                  <div class="col-md-8">
+                    <h3>&nbsp;</h3>
                   </div>
+                  <div class="col-md-4">
+                    <h3>&nbsp;</h3>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
-
-          </div>
-
         </div>
       </main>
 

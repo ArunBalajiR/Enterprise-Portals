@@ -21,16 +21,16 @@
         </a>
         <a
           (click)="navToQuotation()"
-          class="list-group-item active list-group-item-action border-0 align-items-center"
+          class="list-group-item list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-arrow-left-circle"></span>
+          <span class="bi bi-file-earmark-spreadsheet"></span>
           <span class="ml-2">Quotation</span>
         </a>
         <a
           (click)="navToPurchaseOrder()"
-          class="list-group-item list-group-item-action border-0 align-items-center"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
         >
-          <span class="bi bi-file-earmark-text"></span>
+          <span class="bi bi-arrow-left-circle"></span>
           <span class="ml-1">Pur. Order</span>
         </a>
         <a
@@ -60,7 +60,7 @@
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
-        <h3>Purchase Doc Num : {{ qtData[0].PO_NUMBER }}</h3>
+        <h3>Purchase Doc Num : {{ poData[0].PO_NUMBER }}</h3>
         <button class="btn py-0 d-lg-none" id="open-sidebar">
           <span class="bi bi-list text-primary h3"></span>
         </button>
@@ -113,17 +113,16 @@
                     <th>PO.Item</th>
                     <th>Material</th>
                     <th>Description</th>
-                    <th>Quantity</th>
-
+                    <th>St.Location</th>
                     <th>Nt.Price</th>
-                    <th>Gross Value</th>
-                    <th>Deadline</th>
+                    <th>Quantity</th>
+                    <th>Nt.Value</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     *ngFor="
-                      let item of qtData
+                      let item of poData
                         | filter: searchKey
                         | paginate: { itemsPerPage: 6, currentPage: page }
                     "
@@ -132,14 +131,13 @@
                     <td>{{ item.PO_ITEM }}</td>
                     <td>{{ +item.MATERIAL }}</td>
                     <td>{{ item.SHORT_TEXT }}</td>
-                    <td>{{ item.TARGET_QTY }}</td>
-
+                    <td>{{ item.STORE_LOC }}</td>
                     <td>
                       {{ item.NET_PRICE }}
                     </td>
-                    <td>{{ item.GROS_VALUE }}</td>
+                    <td>{{ +item.QUANTITY }}</td>
 
-                    <td>{{ item.QUOT_DEAD | formattedDate }}</td>
+                    <td>{{ item.NET_VALUE }}</td>
                   </tr>
                 </tbody>
               </table>
