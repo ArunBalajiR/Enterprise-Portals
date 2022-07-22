@@ -1,1 +1,292 @@
-<p>epprofile works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar -->
+    <div
+      class="col-md-3 col-lg-2 px-0 position-fixed h-100 bg-white shadow-sm sidebar"
+      id="sidebar"
+    >
+      <img
+        width="100%"
+        class="text-primary d-flex my-4 justify-content-center"
+        src="https://vishnu.edu.in/companylogos/KAAR.PNG"
+      />
+
+      <div class="list-group rounded-0">
+        <a
+          (click)="navToEmployeeDashboard()"
+          class="list-group-item list-group-item-action border-0 d-flex align-items-center"
+        >
+          <span class="bi bi-grid-1x2"></span>
+          <span class="ml-2">Dashboard</span>
+        </a>
+
+        <a
+          (click)="navToLeavereq()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-credit-card"></span>
+          <span class="ml-2">Leave Req</span>
+        </a>
+        <a
+          (click)="navToPayslip()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-cash-stack"></span>
+          <span class="ml-2">Payslip</span>
+        </a>
+        <a
+          (click)="navToProfile()"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-person"></span>
+          <span class="ml-2">Profile</span>
+        </a>
+        <a
+          (click)="logOut()"
+          class="list-group-item list-group-item-action border-0 align-items-center"
+        >
+          <span class="bi bi-box-arrow-right"></span>
+          <span class="ml-2">Logout</span>
+        </a>
+      </div>
+    </div>
+    <!-- overlay to close sidebar on small screens -->
+    <div
+      class="w-100 vh-100 position-fixed overlay d-none"
+      id="sidebar-overlay"
+    ></div>
+    <!-- note: in the layout margin auto is the key as sidebar is fixed -->
+    <div class="col-md-9 col-lg-10 ml-md-auto px-0">
+      <!-- top nav -->
+      <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
+        <!-- close sidebar -->
+        <h3>Profile Information</h3>
+        <button class="btn py-0 d-lg-none" id="open-sidebar">
+          <span class="bi bi-list text-primary h3"></span>
+        </button>
+        <div class="dropdown ml-auto">
+          <button
+            class="btn py-0 d-flex align-items-center"
+            id="logout-dropdown"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="bi bi-person text-primary h4"></span>
+            <span class="bi bi-chevron-down ml-1 mb-2 small"></span>
+          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right border-0 shadow-sm"
+            aria-labelledby="logout-dropdown"
+          >
+            <a class="dropdown-item" (click)="navToProfile()">Profile</a>
+            <a class="dropdown-item" (click)="logOut()">Logout</a>
+          </div>
+        </div>
+      </nav>
+      <!-- main content -->
+      <main class="container-fluid">
+        <div class="container">
+          <div
+            class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12 edit_information"
+          >
+            <form action="" method="POST">
+              <h4>Employee Details</h4>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Employee ID:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.id }}"
+                      readonly
+                      name="first_name"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Name : </label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      class="form-control"
+                      value="{{ employeeProfile.name }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Street :</label>
+                    <input
+                      type="text"
+                      name="custid"
+                      class="form-control"
+                      value="{{ employeeProfile.street }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">City:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.city }}"
+                      class="form-control"
+                      required
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Postal Code: </label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      value="{{ employeeProfile.postalcode }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Country:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.country }}"
+                      class="form-control"
+                      required
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Phone: </label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      value="{{ employeeProfile.phone }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <h4>Company Details</h4>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Company Code:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.companycode }}"
+                      readonly
+                      name="first_name"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Company Name : </label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      class="form-control"
+                      value="{{ employeeProfile.companyname }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Company City:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.companycity }}"
+                      class="form-control"
+                      required
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Country: </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="{{ employeeProfile.companycountry }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Currency:</label>
+                    <input
+                      type="text"
+                      value="{{ employeeProfile.companycurrency }}"
+                      class="form-control"
+                      required
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label class="profile_details_text">Phone: </label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      value="{{ employeeProfile.phone }}"
+                      readonly
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 submit">
+                  <div class="form-group">
+                    <input
+                      type="submit"
+                      class="btn btn-success"
+                      value="Edit"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

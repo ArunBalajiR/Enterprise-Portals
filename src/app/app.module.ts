@@ -42,6 +42,10 @@ import { VpquotitemComponent } from './vendor/vpquotitem/vpquotitem.component';
 import { VppaymentclComponent } from './vendor/vppaymentcl/vppaymentcl.component';
 import { VpgoodsitemsComponent } from './vendor/vpgoodsitems/vpgoodsitems.component';
 import { VppoitemsComponent } from './vendor/vppoitems/vppoitems.component';
+import { PayslipComponent } from './employee/payslip/payslip.component';
+import { LeavereqComponent } from './employee/leavereq/leavereq.component';
+import { PayslipprintComponent } from './employee/payslipprint/payslipprint.component';
+
 
 
 @NgModule({
@@ -81,6 +85,10 @@ import { VppoitemsComponent } from './vendor/vppoitems/vppoitems.component';
     VppaymentclComponent,
     VpgoodsitemsComponent,
     VppoitemsComponent,
+    PayslipComponent,
+    LeavereqComponent,
+    PayslipprintComponent,
+
 
 
   ],

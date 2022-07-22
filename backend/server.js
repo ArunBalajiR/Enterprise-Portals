@@ -1778,7 +1778,147 @@ app.post('/emplogin',(req,res)=>{
 
 });
 
-//OVERALL EMPLOYEE DATA AND VENDOR INVOICE DATA
+//Employee profile
+app.post('/empprofile',(req,res)=>{
+  let id = req.body.id;
+  var empprofileBody = `<?xml version="1.0" encoding="UTF-8"?>
+  <ns0:ZPIPO_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID>${id}</EMPID>
+     <ID/>
+     <PS_PDF/>
+     <STATUS>EP</STATUS>
+  </ns0:ZPIPO_FM>`;
+  console.log("Employee Profile Call");
+  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeportaldatabyarun')
+  .headers({
+    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
+    'Content-Type' : 'text/xml'
+  })
+  .send(empprofileBody)
+  .end(function(result){
+    if(result.error){
+      console.log('Unable to fetch Employee Profile data');
+      console.log(result.body);
+      res.json({ success : false, message : "No records found"});
+    }
+    else if(result.body.EMPDATA['PERNR'] === '00000000'){
+      console.log('Unable to fetch Profile data');
+      res.json({ success : false, message : "No records found"});
+    }
+    else{
+      res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
+    }
+
+  })
+
+});
+
+//EMPLOYEE PAYSLIP LIST
+app.post('/payslip',(req,res)=>{
+  let id = req.body.id;
+  var payslipBody = `<?xml version="1.0" encoding="UTF-8"?>
+  <ns0:ZPIPO_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID>${id}</EMPID>
+     <ID/>
+     <PS_PDF/>
+     <STATUS>PS</STATUS>
+  </ns0:ZPIPO_FM>`;
+  console.log("Employee Payslip Call");
+  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeportaldatabyarun')
+  .headers({
+    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
+    'Content-Type' : 'text/xml'
+  })
+  .send(payslipBody)
+  .end(function(result){
+    if(result.error){
+      console.log('Unable to fetch data');
+      console.log(result.body);
+      res.json({ success : false, message : "No records found"});
+    }
+    else if(result.body.PAYSLIP_DET === ''){
+      console.log('Unable to fetch data');
+      res.json({ success : false, message : "No records found"});
+    }
+    else{
+      res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
+    }
+
+  })
+
+});
+
+
+
+//EMPLOYEE PRINT PAYSLIP
+app.post('/printpayslip',(req,res)=>{
+  let id = req.body.id;
+  let seqence = req.body.sequence;
+  var payDetailBody = `<?xml version="1.0" encoding="UTF-8"?>
+  <ns0:ZPIPO_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID>${id}</EMPID>
+     <PS_PDF>${seqence}</PS_PDF>
+     <STATUS>PSPDF</STATUS>
+  </ns0:ZPIPO_FM>`;
+  console.log("Employee Payslip Detail Call");
+  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeportaldatabyarun')
+  .headers({
+    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
+    'Content-Type' : 'text/xml'
+  })
+  .send(payDetailBody)
+  .end(function(result){
+    if(result.error){
+      console.log('Unable to fetch data');
+      console.log(result.body);
+      res.json({ success : false, message : "No records found"});
+    }
+    else if(result.body.PAYSLIP_HTML === ''){
+      console.log('Unable to fetch data');
+      res.json({ success : false, message : "No records found"});
+    }
+    else{
+      res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
+    }
+
+  })
+
+}
+)
+
+//EMPLOYEE Leave Request LIST
+app.post('/leavereq',(req,res)=>{
+  let id = req.body.id;
+  var leavereqBody = `<?xml version="1.0" encoding="UTF-8"?>
+  <ns0:ZPIPO_FM xmlns:ns0="urn:sap-com:document:sap:rfc:functions">
+     <EMPID>${id}</EMPID>
+     <PS_PDF></PS_PDF>
+     <STATUS>LD</STATUS>
+  </ns0:ZPIPO_FM>`;
+  console.log("Employee Leave Request Call");
+  var req = unirest('GET','http://dxktpipo.kaarcloud.com:50000/RESTAdapter/employeeportaldatabyarun')
+  .headers({
+    'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
+    'Content-Type' : 'text/xml'
+  })
+  .send(leavereqBody)
+  .end(function(result){
+    if(result.error){
+      console.log('Unable to fetch data');
+      console.log(result.body);
+      res.json({ success : false, message : "No records found"});
+    }
+    else if(result.body.IT_LEAVE_DETAIL === ''){
+      console.log('Unable to fetch data');
+      res.json({ success : false, message : "No records found"});
+    }
+    else{
+      res.status(200).json({success : true, message : "Records fetched Successfully", data: result.body});
+    }
+
+  })
+
+});
 
 
 //IF NOT FOUND

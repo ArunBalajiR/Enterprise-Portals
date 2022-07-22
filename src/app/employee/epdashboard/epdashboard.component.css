@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+
+body{
+  font-family: 'Barlow', sans-serif;
+  padding-top: 1px;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.border-left{
+  border-left: 2px solid var(--primary) !important;
+}
+
+
+.sidebar{
+  top: 0;
+  left : 0;
+  z-index : 100;
+  overflow-y: auto;
+}
+
+.overlay{
+  background-color: rgb(0 0 0 / 45%);
+  z-index: 99;
+}
+
+/* sidebar for small screens */
+@media screen and (max-width: 767px){
+
+  .sidebar{
+    max-width: 18rem;
+    transform : translateX(-100%);
+    transition : transform 0.4s ease-out;
+  }
+
+  .sidebar.active{
+    transform : translateX(0);
+  }
+
+}
+.panel {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: 160px;
+  margin: 10px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.panel a {
+  position: relative;
+  display: block;
+  padding: 12px 25px 25px 25px;
+  color: #fff;
+  text-decoration: none;
+  z-index: 2;
+}
+.panel a span {
+  display: block;
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 96px;
+}
+.panel:after {
+  position: absolute;
+  font-family: FontAwesome;
+  color: #000000;
+  z-index: 1;
+  transition: all 0.5s;
+  line-height: normal;
+}
+.panel.post {
+  background-color: #b8aa0e;
+}
+.panel.post:after {
+  content: "\f0d1";
+  font-size: 200px;
+  color: #a5980d;
+  top: 45px;
+  right: 60px;
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
+}
+.panel.post:hover:after {
+  top: 8px;
+}
+.panel.comment {
+  background-color: #0377c0;
+}
+.panel.comment:after {
+  content: "\f075";
+  font-size: 180px;
+  color: #036bac;
+  top: 30px;
+  right: 35px;
+}
+.panel.comment:hover:after {
+  top: -5px;
+}
+.panel.page {
+  background-color: #279824;
+}
+.panel.page:after {
+  content: "\f15c";
+  font-size: 160px;
+  color: #238820;
+  top: 62px;
+  right: 39px;
+}
+.panel.page:hover:after {
+  top: 24px;
+}
+.panel.user {
+  background-color: #fc1c3e;
+}
+.panel.user:after {
+  content: "\f007";
+  font-size: 200px;
+  color: #ec0326;
+  top: 45px;
+  right: 35px;
+}
+.panel.user:hover:after {
+  top: 7px;
+}
+.panel:hover:after {
+  transition: all 0.5s;
+}
+
+.list-group-item {
+  text-decoration: none;
+}
+
+.dropdown-item {
+  text-decoration : none;
+}

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NetworkService } from 'src/app/services/network.service';
+
 
 @Component({
   selector: 'app-epprofile',
@@ -7,9 +10,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EpprofileComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(
+    public router: Router,
+    public network:NetworkService
+  ) {}
+
+  employeeId:any;
 
   ngOnInit(): void {
+    this.employeeId=localStorage.getItem('employeeId');
+    this.network.getEmpProfileData(this.employeeId);
   }
+
+  get employeeProfile(){
+    return this.network.empprofData;
+  }
+
+
+  logOut() {
+    localStorage.clear();
+    this.network.logoutClearCache();
+    this.router.navigate(['/employee'])
+  }
+  navToProfile() {
+  }
+
+  navToPayslip(){
+    this.router.navigate(['/payslip'])
+  }
+
+  navToLeavereq(){
+    this.router.navigate(['/leavereq'])
+  }
+
+
+  navToEmployeeDashboard() {
+    this.router.navigate(['/epdashboard'])
+  }
+
+
 
 }

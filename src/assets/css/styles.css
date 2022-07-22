@@ -8,6 +8,12 @@ body, p {
 	color: #5e6576;
 	font: 400 1rem/1.625rem "Open Sans", sans-serif;
 }
+pre {
+  display: block;
+  font-size: 13px;
+  color: #212529;
+}
+
 
 h1 {
 	color:#223150;
@@ -66,7 +72,7 @@ h5 {
 }
 
 h6 {
-	
+
 	font-weight: 700;
 	font-size: 1rem;
 	line-height: 1.375rem;

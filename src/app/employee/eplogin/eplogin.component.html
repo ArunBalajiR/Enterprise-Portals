@@ -1,1 +1,83 @@
-<p>eplogin works!</p>
+<app-header></app-header>
+<div id="contact" class="form-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="text-container">
+          <div class="section-title">Hello !</div>
+          <h2>
+            Welcome to <br /><span
+              ><h1>{{ portalName }}</h1></span
+            >
+          </h2>
+          <p>
+            {{ portalSubtext }}
+          </p>
+          <ul class="list-unstyled li-space-lg">
+            <li class="d-flex">
+              <i class="fas fa-square"></i>
+              <div class="flex-grow-1">
+                {{ bulletOne }}
+              </div>
+            </li>
+            <li class="d-flex">
+              <i class="fas fa-square"></i>
+              <div class="flex-grow-1">
+                {{ bulletTwo }}
+              </div>
+            </li>
+            <li class="d-flex">
+              <i class="fas fa-square"></i>
+              <div class="flex-grow-1">
+                {{ bulletThree }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="text-container">
+          <h2>Login</h2>
+          <form (ngSubmit)="onSubmit(cpLoginForm)" #cpLoginForm="ngForm">
+            <div class="form-group">
+              <input
+                type="text"
+                [(ngModel)]="authUser.userid"
+                name="userid"
+                class="form-control-input"
+                placeholder="Enter Employee ID"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                [(ngModel)]="authUser.password"
+                name="password"
+                class="form-control-input"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div [hidden]="flag" class="alert alert-danger" role="alert">
+              Invalid Credentials
+            </div>
+            <div class="form-group">
+              <button
+                [disabled]="!cpLoginForm.form.valid"
+                type="submit"
+                class="form-control-submit-button"
+              >
+                Submit
+              </button>
+            </div>
+
+            <div class="section-title">Forgot Password ?</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

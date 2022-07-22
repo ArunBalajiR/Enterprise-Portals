@@ -10,11 +10,10 @@
         class="text-primary d-flex my-4 justify-content-center"
         src="https://vishnu.edu.in/companylogos/KAAR.PNG"
       />
-
       <div class="list-group rounded-0">
         <a
           (click)="navToEmployeeDashboard()"
-          class="list-group-item list-group-item-action active border-0 d-flex align-items-center"
+          class="list-group-item list-group-item-action border-0 d-flex align-items-center"
         >
           <span class="bi bi-grid-1x2"></span>
           <span class="ml-2">Dashboard</span>
@@ -29,7 +28,7 @@
         </a>
         <a
           (click)="navToPayslip()"
-          class="list-group-item list-group-item-action border-0 align-items-center"
+          class="list-group-item active list-group-item-action border-0 align-items-center"
         >
           <span class="bi bi-cash-stack"></span>
           <span class="ml-2">Payslip</span>
@@ -60,6 +59,7 @@
       <!-- top nav -->
       <nav class="w-100 d-flex px-4 py-2 mb-4 shadow-sm">
         <!-- close sidebar -->
+        <h3>Payslip Print Preview</h3>
         <button class="btn py-0 d-lg-none" id="open-sidebar">
           <span class="bi bi-list text-primary h3"></span>
         </button>
@@ -84,29 +84,48 @@
       </nav>
       <!-- main content -->
       <main class="container-fluid">
-        <h2>Welcome {{ employeeName }} !</h2>
-        <section class="row">
-          <div class="col-md-9 col-lg-4">
-            <div class="panel comment">
-              <a (click)="navToLeavereq()"
-                ><span>{{ leaveReqCount }}</span
-                >Leave Req</a
-              >
-            </div>
-          </div>
-          <div class="col-md-9 col-lg-4">
-            <div class="panel page">
-              <a (click)="navToPayslip()"
-                ><span>{{ paySlipCount }}</span
-                >Payslip</a
-              >
-            </div>
-          </div>
-        </section>
+        <div id="invoice" class="container" [innerHTML]="payslipHTML"></div>
       </main>
+      <div class="container" id="spincontainer">
+        <div class="row h-100">
+          <div class="w-25 mx-auto">
+            <div
+              class="spinner-border text-primary spin"
+              style="width: 3rem; height: 3rem"
+              role="status"
+              [hidden]="network.isLoading"
+            ></div>
+          </div>
+        </div>
 
-      <div class="fixed-bottom">
-        <app-footer></app-footer>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-1">
+            <button id="b2" class="icon-button" (click)="navToPayslip()">
+              <i class="fa fa-ban"></i>
+              <i class="fa fa-arrow-left fa--bottom"></i>Cancel
+            </button>
+          </div>
+          <div class="col-md-1"></div>
+
+          <div class="col-md-1">
+            <button id="b2" (click)="printPayslip()" class="icon-button">
+              <i class="fa fa-download"></i>
+              <i class="fa fa-file-pdf fa--bottom"></i>Download
+            </button>
+          </div>
+
+          <div class="col-md-1"></div>
+          <div class="col-md-1"></div>
+          <div class="col-md-1"></div>
+        </div>
+        <div style="height: 70px"></div>
+        <div class="fixed-bottom">
+          <app-footer></app-footer>
+        </div>
       </div>
     </div>
   </div>

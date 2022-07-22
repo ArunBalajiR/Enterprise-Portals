@@ -8,6 +8,7 @@ export class NetworkService {
 
   customerProfile: any;
   vendorProfile: any;
+  empProfile: any;
 
 
   private inquiryData: any;
@@ -71,7 +72,17 @@ export class NetworkService {
   private vinvoiceJson: any;
   private vinvoiceGeneralLedger: any = [];
 
+  private payslipData: any;
+  private payslipDataCount: any;
+  private payslipJson: any;
 
+  private payslipHTML: any;
+  private payslipHTMLJson: any;
+  private payslipHtmlText: any = "";
+
+  private leavereqData: any;
+  private leavereqJson: any;
+  private leavereqCount: any;
 
 
 
@@ -575,6 +586,139 @@ export class NetworkService {
 
   setEmpty() {
     this.isObject = true;
+  }
+
+  //EMPLOYEE PORTAL
+  //profile
+  getEmpProfileData(empId: any) {
+    if (!this.empProfile) {
+      this.empProfile = {
+        id: 'Loading..',
+        name: 'Loading..',
+        street: '',
+        nationality: '',
+        city: '',
+        country: '',
+        region: '',
+        postalcode: '',
+        phone: '',
+        startdate: '',
+        companycode: '',
+        companyname: '',
+        companycity: '',
+        companycountry: '',
+        companycurrency: ''
+      };
+
+      this.http.post("http://localhost:5000/empprofile", { id: empId }).subscribe(
+        response => {
+          var empProfileJson = JSON.parse(JSON.stringify(response));
+          this.empProfile.id = empProfileJson.data.EMPDATA['PERNR'];
+          this.empProfile.name = empProfileJson.data.EMPDATA['ENAME'];
+          this.empProfile.nationality = empProfileJson.data.EMPDATA['NATIO'];
+          this.empProfile.city = empProfileJson.data.EMPDATA['ORT01'];
+          this.empProfile.street = empProfileJson.data.EMPDATA['STRAS'];
+          this.empProfile.country = empProfileJson.data.EMPDATA['LAND'];
+          this.empProfile.postalcode = empProfileJson.data.EMPDATA['PSTLZ'];
+          this.empProfile.phone = empProfileJson.data.EMPDATA['TELNR'];
+          this.empProfile.startdate = empProfileJson.data.EMPDATA['BEGDA'];
+          this.empProfile.companycode = empProfileJson.data.COMPANY['item']['COMP_CODE'];
+          this.empProfile.companyname = empProfileJson.data.COMPANY['item']['COMP_NAME'];
+          this.empProfile.companycity = empProfileJson.data.COMPANY['item']['CITY'];
+          this.empProfile.companycountry = empProfileJson.data.COMPANY['item']['COUNTRY'];
+          this.empProfile.companycurrency = empProfileJson.data.COMPANY['item']['CURRENCY'];
+
+        },
+        err => {
+          console.log(err);
+        }
+      )
+
+    }
+
+  }
+
+  get empprofData() {
+    return this.empProfile;
+  }
+
+  getPayslipData(employeeId: any) {
+    if (!this.payslipData) {
+      this.http.post("http://localhost:5000/payslip", { id: employeeId }).subscribe(
+        response => {
+          this.isLoading = true;
+          console.log(response);
+          this.payslipJson = JSON.parse(JSON.stringify(response));
+          this.payslipData = this.payslipJson.data.PAYSLIP_DET.item;
+          this.payslipDataCount = (this.payslipData.length);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
+  }
+
+  get paySlip() {
+    return this.payslipData;
+  }
+
+  get paysCount() {
+    return this.payslipDataCount;
+  }
+
+
+  //Payslip HTML
+  getPayslipHTML(employeeObj: any) {
+    this.http.post("http://localhost:5000/printpayslip", employeeObj).subscribe(
+      response => {
+        this.isLoading = true;
+        this.payslipHTMLJson = JSON.parse(JSON.stringify(response));
+        this.payslipHTML = this.payslipHTMLJson.data.PAYSLIP_HTML.item;
+        console.log(this.payslipHTML);
+        for (let i = 0; i < this.payslipHTML.length; i++) {
+          this.payslipHtmlText += this.payslipHTML[i].LINE;
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+
+  }
+
+  get payslipHTM() {
+    return this.payslipHtmlText;
+  }
+
+  setpayslipHTM(){
+    this.payslipHtmlText=""
+  }
+
+  getLeaveRequest(employeeId: any) {
+    if (!this.leavereqData) {
+      this.http.post("http://localhost:5000/leavereq", { id: employeeId }).subscribe(
+        response => {
+          this.isLoading = true;
+          console.log(response);
+          this.leavereqJson = JSON.parse(JSON.stringify(response));
+
+          this.leavereqData = this.leavereqJson.data.IT_LEAVE_DETAIL.item;
+          this.leavereqCount = (this.leavereqData.length);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
+  }
+
+  get leavereq() {
+    return this.leavereqData;
+  }
+
+  get leaveCount() {
+    return this.leavereqCount;
   }
 
   logoutClearCache() {

@@ -11,6 +11,12 @@ import { CploginComponent } from './customer/cplogin/cplogin.component';
 import { CppaymentComponent } from './customer/cppayment/cppayment.component';
 import { CpprofileComponent } from './customer/cpprofile/cpprofile.component';
 import { CpsaleorderComponent } from './customer/cpsaleorder/cpsaleorder.component';
+import { EpdashboardComponent } from './employee/epdashboard/epdashboard.component';
+import { EploginComponent } from './employee/eplogin/eplogin.component';
+import { EpprofileComponent } from './employee/epprofile/epprofile.component';
+import { LeavereqComponent } from './employee/leavereq/leavereq.component';
+import { PayslipComponent } from './employee/payslip/payslip.component';
+import { PayslipprintComponent } from './employee/payslipprint/payslipprint.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './services/auth.guard';
 import { VpcreditComponent } from './vendor/vpcredit/vpcredit.component';
@@ -113,7 +119,7 @@ const routes: Routes = [
   },
   {
     path: 'vpoitems',
-    component : VppoitemsComponent
+    component: VppoitemsComponent
   },
   {
     path: 'goodsreceipt',
@@ -148,6 +154,30 @@ const routes: Routes = [
   {
     path: 'vpaymentc',
     component: VppaymentclComponent
+  },
+  {
+    path: 'employee',
+    component: EploginComponent
+  },
+  {
+    path: 'epdashboard',
+    component: EpdashboardComponent
+  },
+  {
+    path: 'epprofile',
+    component: EpprofileComponent
+  },
+  {
+    path: 'payslip',
+    component: PayslipComponent
+  },
+  {
+    path: 'leavereq',
+    component: LeavereqComponent
+  },
+  {
+    path: 'payslipprint',
+    component: PayslipprintComponent
   }
 ];
 
