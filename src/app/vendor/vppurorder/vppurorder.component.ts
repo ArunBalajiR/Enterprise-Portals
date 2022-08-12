@@ -12,6 +12,8 @@ export class VppurorderComponent implements OnInit {
 
   searchKey: any;
   vendorId: any;
+  myjson:any=JSON;
+  object:any=Object;
 
   page: number = 1;
   constructor(

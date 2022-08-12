@@ -14,6 +14,7 @@ export class VpcreditComponent implements OnInit {
   searchKey:any;
   vendorId:any;
   page:number=1;
+  myjson:any=JSON;
   constructor(
     public router: Router,
     public network:NetworkService,

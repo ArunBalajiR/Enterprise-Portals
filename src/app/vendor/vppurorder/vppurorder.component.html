@@ -128,13 +128,17 @@
                   >
                     <td>{{ +item.PO_NUMBER }}</td>
                     <td>{{ item.DOC_DATE | formattedDate }}</td>
-                    <td>{{ +item.CUSTOMER }}</td>
+                    <td>{{ object.keys(item.CUSTOMER).length === 0 ? "-" : +item.CUSTOMER }}</td>
                     <td>{{ +item.EXCH_RATE }} {{ item.CURRENCY }}</td>
                     <td>
                       {{ +item.EXPORT_NO }}
                     </td>
                     <td>
-                      <button (click)="gotoPoitems(item.PO_NUMBER)" id="b2" class="icon-button">
+                      <button
+                        (click)="gotoPoitems(item.PO_NUMBER)"
+                        id="b2"
+                        class="icon-button"
+                      >
                         <i class="fa fa-list"></i>
                         <i class="fa fa-info fa--bottom"></i>View Items
                       </button>

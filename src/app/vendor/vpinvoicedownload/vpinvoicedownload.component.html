@@ -138,10 +138,7 @@
 
               <div id="invoice-mid">
                 <div id="message">
-                  <h2>
-                    Hello {{ vendorProfile.fname }}
-                    {{ vendorProfile.lname }},
-                  </h2>
+                  <h2>Hello {{ vendorProfile.fname }},</h2>
                   <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;An invoice with invoice number
                     #<span id="invoice_num">{{ invoiceDetail.BELNR }}</span>
@@ -161,10 +158,11 @@
                     </div>
                     <div class="clientinfo">
                       <h2 id="supplier">
-                        {{ vendorProfile.fname }} {{ vendorProfile.lname }}
+                        {{ vendorProfile.fname }}
                       </h2>
                       <p>
-                        <span>Street : {{ vendorProfile.street }}</span><br />
+                        <span>Street : {{ vendorProfile.street }}</span
+                        ><br />
                         <span id="city">City :{{ vendorProfile.city }}</span
                         ><br /><span id="address"
                           >Country : {{ vendorProfile.country }}</span
@@ -216,7 +214,6 @@
                       <tr>
                         <td class="col-md-6">Exchange Rate</td>
                         <td class="col-md-2">
-
                           <b
                             >{{ invoiceDetail.KURSF }}
                             {{ invoiceDetail.WAERS }}</b
@@ -244,20 +241,14 @@
                       <tr>
                         <td class="col-md-9">Cash Discount Percentage I</td>
                         <td class="col-md-3">
-                          <b
-                            >{{ +invoiceDetail.ZBD1P }} %
-                            </b
-                          >
+                          <b>{{ +invoiceDetail.ZBD1P }} % </b>
                         </td>
                       </tr>
 
                       <tr>
                         <td class="col-md-9">Cash Discount Percentage II</td>
                         <td class="col-md-3">
-                          <b
-                            >{{ +invoiceDetail.ZBD2P }} %
-                            </b
-                          >
+                          <b>{{ +invoiceDetail.ZBD2P }} % </b>
                         </td>
                       </tr>
                       <tr>

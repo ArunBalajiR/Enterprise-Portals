@@ -13,6 +13,7 @@ export class VpdebitComponent implements OnInit {
 
   searchKey:any;
   vendorId:any;
+  myjson:any=JSON;
   page:number=1;
   constructor(
     public router: Router,

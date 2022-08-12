@@ -12,6 +12,7 @@ export class VpquotationComponent implements OnInit {
 
   searchKey: any;
   vendorId: any;
+  object:any=Object;
 
   page: number = 1;
 

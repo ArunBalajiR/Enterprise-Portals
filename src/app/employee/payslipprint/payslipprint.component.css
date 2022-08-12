@@ -3,11 +3,11 @@ body{
   padding-top: 1px;
 }
 
-pre {
+/* pre {
   display: block;
-  font-size: 13px;
+  font-size: 10px;
   color: #212529;
-}
+} */
 
 a:hover{
   text-decoration: none;

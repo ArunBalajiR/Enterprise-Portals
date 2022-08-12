@@ -38,6 +38,9 @@ export class PayslipprintComponent implements OnInit {
 
   }
 
+  get payslipPreview(){
+    return this.network.payslipHTMPreview;
+  }
 
 
   get payslipHTML() {
@@ -45,6 +48,30 @@ export class PayslipprintComponent implements OnInit {
   }
 
 
+  // downloadPayslip(){
+  //   let base64 = this.payslipHTML;
+  //   console.log(base64)
+  //   let now = new Date();
+  //   this.downloadPDF(base64,`Payslip${now.toLocaleDateString()}.pdf`)
+  // }
+
+  downloadPayslip() {
+    const linkSource = 'data:application/pdf;base64,' + this.payslipHTML;
+    const downloadLink = document.createElement("a");
+    const fileName = "sample.pdf";
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
+  downloadPDF(base64: any,filename:string){
+    const source = `data:application/pdf;base64,${base64}`;
+    const link = document.createElement("a")
+    link.href = source
+    link.download = `${filename}.pdf`
+    link.click
+  }
 
   printPayslip = () => {
     var data: any = document.getElementById('invoice');

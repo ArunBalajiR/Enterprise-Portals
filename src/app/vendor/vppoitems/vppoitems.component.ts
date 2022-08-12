@@ -12,9 +12,12 @@ export class VppoitemsComponent implements OnInit {
 
   searchKey: any;
   vendorId: any;
+  myjson:any=JSON;
+  
 
   page: number = 1;
   constructor(
+
     public router: Router,
     public network: NetworkService,
     public sharedData: ShareddataService

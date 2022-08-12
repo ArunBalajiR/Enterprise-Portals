@@ -59,6 +59,8 @@ export class NetworkService {
 
   private vcreditData: any;
   private vdebitData: any;
+  private vfilteredCredData: any = [];
+  private vfilteredDebtData: any = [];
   private vcreditDebitJson: any;
 
   private vpaymentData: any;
@@ -79,6 +81,7 @@ export class NetworkService {
   private payslipHTML: any;
   private payslipHTMLJson: any;
   private payslipHtmlText: any = "";
+  private payslipHtmlTextP: any = "";
 
   private leavereqData: any;
   private leavereqJson: any;
@@ -98,6 +101,7 @@ export class NetworkService {
         id: '000000000',
         fname: 'Loading..',
         lname: 'Loading..',
+        street: 'Loading..',
         city: '',
         region: '',
         postalcode: '',
@@ -107,13 +111,14 @@ export class NetworkService {
       this.http.post("http://localhost:5000/profile", { id: customerId }).subscribe(
         response => {
           var profileJson = JSON.parse(JSON.stringify(response));
-          this.customerProfile.id = profileJson.data.PROFILE['KUNNR'];
-          this.customerProfile.fname = profileJson.data.PROFILE['NAME1'];
-          this.customerProfile.lname = profileJson.data.PROFILE['NAME2'];
-          this.customerProfile.city = profileJson.data.PROFILE['ORT01'];
-          this.customerProfile.region = profileJson.data.PROFILE['REGIO'];
-          this.customerProfile.postalcode = profileJson.data.PROFILE['PSTLZ'];
-          this.customerProfile.phone = profileJson.data.PROFILE['TELF1'];
+          this.customerProfile.id = profileJson.data['CUSTOMER'];
+          this.customerProfile.fname = profileJson.data['NAME'];
+          this.customerProfile.lname = profileJson.data['NAME_2'];
+          this.customerProfile.street = profileJson.data['STREET'];
+          this.customerProfile.city = profileJson.data['CITY'];
+          this.customerProfile.region = profileJson.data['REGION'];
+          this.customerProfile.postalcode = profileJson.data['POSTL_CODE'];
+          this.customerProfile.phone = profileJson.data['TELEPHONE'];
 
         },
         err => {
@@ -167,7 +172,7 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.saleorderJson = JSON.parse(JSON.stringify(response));
-          this.saleorderData = this.saleorderJson.data.SALEORDERS.item;
+          this.saleorderData = this.saleorderJson.data.SALES_ORDERS.item;
           this.saleorderCount = this.saleorderData.length;
 
         },
@@ -258,7 +263,7 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.paymentJson = JSON.parse(JSON.stringify(response));
-          this.paymentData = this.paymentJson.data.INV_DET.item;
+          this.paymentData = this.paymentJson.data.INVOICELIST.item;
           let k = 0;
           for (let i = 0; i < this.paymentData.length; i++) {
             if (this.paymentData[i].KOART === 'S') {
@@ -267,7 +272,7 @@ export class NetworkService {
           }
 
           for (let i = 0; i < this.paymentGeneralLedger.length; i++) {
-            if (this.paymentGeneralLedger[i].MANDT === 100) {
+            if (this.paymentGeneralLedger[i].MANDT === "100") {
               var due_date = new Date(this.paymentGeneralLedger[i].MADAT);
               let curr_date = new Date();
               var time = curr_date.getTime() - due_date.getTime();
@@ -299,7 +304,7 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.invoiceJson = JSON.parse(JSON.stringify(response));
-          this.invoiceData = this.invoiceJson.data.INV_DET.item;
+          this.invoiceData = this.invoiceJson.data.INVOICELIST.item;
           let k = 0;
           for (let i = 0; i < this.invoiceData.length; i++) {
             if (this.invoiceData[i].KOART === 'S') {
@@ -371,20 +376,18 @@ export class NetworkService {
           this.isLoading = true;
           console.log(response);
           this.quotationJson = JSON.parse(JSON.stringify(response));
-          this.isObject = (typeof this.quotationJson.data.RFQ_HEAD) === "object";
-          if (!this.isObject) {
-            this.quotationData = this.quotationJson.data.RFQ_HEAD.item;
-            this.quotationItems = this.quotationJson.data.RFQ_VALUES.item;
-            let k = 0;
-            for (let i = 1; i < this.quotationData.length; i++) {
-              this.quotationArray[k++] = this.quotationData[i];
-            }
-            this.quotationCount = (this.quotationArray.length);
-            let r = 0;
-            for (let j = 1; j < this.quotationItems.length; j++) {
-              this.quotationFItems[r++] = this.quotationItems[j];
-            }
+          this.quotationData = this.quotationJson.data.RFQ_HEAD.item;
+          this.quotationItems = this.quotationJson.data.RFQ_VALUES.item;
+          let k = 0;
+          for (let i = 1; i < this.quotationData.length; i++) {
+            this.quotationArray[k++] = this.quotationData[i];
           }
+          this.quotationCount = (this.quotationArray.length);
+          let r = 0;
+          for (let j = 1; j < this.quotationItems.length; j++) {
+            this.quotationFItems[r++] = this.quotationItems[j];
+          }
+
 
         },
         err => {
@@ -489,6 +492,20 @@ export class NetworkService {
           this.vcreditDebitJson = JSON.parse(JSON.stringify(response));
           this.vcreditData = this.vcreditDebitJson.data.CREDITDATA.item;
           this.vdebitData = this.vcreditDebitJson.data.DEBITDATA.item;
+          // let k = 0;
+          // for (let i = 0; i < this.vcreditData.length; i++) {
+          //   if (this.vcreditData[i].KOART === 'K') {
+          //     this.vfilteredCredData[k++] = this.vcreditData[i];
+          //   }
+          // }
+
+          // let l = 0;
+          // for (let i = 0; i < this.vdebitData.length; i++) {
+          //   if (this.vdebitData[i].KOART === 'K') {
+          //     this.vfilteredDebtData[l++] = this.vdebitData[i];
+          //   }
+          // }
+
         },
         err => {
           console.log(err);
@@ -532,7 +549,7 @@ export class NetworkService {
 
           //AGING FOR Closed PAYMENTS
           for (let i = 0; i < this.vclosedpayments.length; i++) {
-            if (this.vclosedpayments[i].REGION === "") {
+            if (Object.keys(this.vclosedpayments[i].REGION).length === 0) {
               var due_date = new Date(this.vclosedpayments[i].DOC_DATE);
               let curr_date = new Date();
               var time = curr_date.getTime() - due_date.getTime();
@@ -674,11 +691,12 @@ export class NetworkService {
       response => {
         this.isLoading = true;
         this.payslipHTMLJson = JSON.parse(JSON.stringify(response));
+        this.payslipHtmlText = this.payslipHTMLJson.data.BASE64;
         this.payslipHTML = this.payslipHTMLJson.data.PAYSLIP_HTML.item;
-        console.log(this.payslipHTML);
         for (let i = 0; i < this.payslipHTML.length; i++) {
-          this.payslipHtmlText += this.payslipHTML[i].LINE;
+          this.payslipHtmlTextP += this.payslipHTML[i].LINE;
         }
+
       },
       err => {
         console.log(err);
@@ -691,9 +709,15 @@ export class NetworkService {
     return this.payslipHtmlText;
   }
 
-  setpayslipHTM(){
-    this.payslipHtmlText=""
+  get payslipHTMPreview() {
+    return this.payslipHtmlTextP;
   }
+
+  setpayslipHTM() {
+    this.payslipHtmlText = ""
+  }
+
+
 
   getLeaveRequest(employeeId: any) {
     if (!this.leavereqData) {

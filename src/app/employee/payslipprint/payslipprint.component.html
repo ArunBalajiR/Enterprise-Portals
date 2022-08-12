@@ -84,7 +84,7 @@
       </nav>
       <!-- main content -->
       <main class="container-fluid">
-        <div id="invoice" class="container" [innerHTML]="payslipHTML"></div>
+        <div id="invoice" class="container" [innerHTML]="payslipPreview"></div>
       </main>
       <div class="container" id="spincontainer">
         <div class="row h-100">
@@ -112,7 +112,7 @@
           <div class="col-md-1"></div>
 
           <div class="col-md-1">
-            <button id="b2" (click)="printPayslip()" class="icon-button">
+            <button id="b2" (click)="downloadPayslip()" class="icon-button">
               <i class="fa fa-download"></i>
               <i class="fa fa-file-pdf fa--bottom"></i>Download
             </button>

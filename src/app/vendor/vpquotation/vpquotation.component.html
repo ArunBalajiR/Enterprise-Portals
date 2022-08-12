@@ -126,7 +126,7 @@
                     <td>{{ +item.PO_NUMBER }}</td>
                     <td>{{ item.DOC_DATE | formattedDate }}</td>
                     <td>{{ item.EXCH_RATE }} {{item.CURRENCY }}</td>
-                    <td>{{ item.INCOTERMS1 ==="" ? "-" : item.INCOTERMS1 }}</td>
+                    <td>{{ object.keys(item.INCOTERMS1).length === 0 ? "-" : item.INCOTERMS1 }}</td>
                     <td>{{ item.QUOT_DEAD | formattedDate }}</td>
 
                     <td><button (click)="gotoRFC(item.PO_NUMBER)"

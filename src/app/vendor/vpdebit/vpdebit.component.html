@@ -148,7 +148,7 @@
                   >
                     <td>{{ +item.BELNR }}</td>
                     <td>{{ +item.MATNR }}</td>
-                    <td>{{ item.MEINS === "EA" ? "Each" : item.MEINS }}</td>
+                    <td>{{ item.MEINS==="EA" ? "Each" : myjson.stringify(item.MEINS) ==="{}" ? "-" : item.MEINS }}</td>
                     <td>{{ +item.MENGE }}</td>
                     <td>{{ item.DMBTR }}</td>
                     <td>{{ item.GJAHR }}</td>

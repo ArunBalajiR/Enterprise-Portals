@@ -68,7 +68,7 @@ export class VpdashboardComponent implements OnInit {
   }
 
   navToQuotation() {
-    if (!this.network.isEmpty) {
+    if (this.network.quotCount > 0) {
       this.router.navigate(['/quotation'])
     } else {
       alert("No Quotations Found");

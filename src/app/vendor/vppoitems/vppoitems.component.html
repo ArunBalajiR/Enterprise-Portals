@@ -131,7 +131,13 @@
                     <td>{{ item.PO_ITEM }}</td>
                     <td>{{ +item.MATERIAL }}</td>
                     <td>{{ item.SHORT_TEXT }}</td>
-                    <td>{{ item.STORE_LOC }}</td>
+                    <td>
+                      {{
+                        myjson.stringify(item.STORE_LOC) === "{}"
+                          ? "-"
+                          : item.STORE_LOC
+                      }}
+                    </td>
                     <td>
                       {{ item.NET_PRICE }}
                     </td>
