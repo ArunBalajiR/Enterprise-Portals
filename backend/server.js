@@ -2607,16 +2607,46 @@ app.post('/leavereq',(req,res)=>{
   var leavereqBody = `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">
   <soapenv:Header/>
   <soapenv:Body>
-     <urn:ZPIPO_FM>
-        <EMPID>${id}</EMPID>
-        <ID></ID>
-        <PS_PDF></PS_PDF>
-        <STATUS>LD</STATUS>
-     </urn:ZPIPO_FM>
+     <urn:ZFM_EMPLOYEE_LEAVEREQ_SB>
+
+        <I_PER_NO>${id}</I_PER_NO>
+        <ET_RESULT>
+
+           <item>
+
+              <EMPLOYEENO></EMPLOYEENO>
+
+              <SUBTYPE></SUBTYPE>
+
+              <OBJECTID></OBJECTID>
+
+              <LOCKINDIC></LOCKINDIC>
+
+              <VALIDEND></VALIDEND>
+
+              <VALIDBEGIN></VALIDBEGIN>
+
+              <RECORDNR></RECORDNR>
+
+              <START></START>
+
+              <END></END>
+
+              <ABSENCETYPE></ABSENCETYPE>
+
+              <NAMEOFABSENCETYPE></NAMEOFABSENCETYPE>
+
+              <ABSENCEDAYS></ABSENCEDAYS>
+
+              <ABSENCEHOURS></ABSENCEHOURS>
+           </item>
+        </ET_RESULT>
+     </urn:ZFM_EMPLOYEE_LEAVEREQ_SB>
   </soapenv:Body>
-</soapenv:Envelope>`;
+</soapenv:Envelope>
+`;
   console.log("Employee Leave Request Call");
-  var req = unirest('POST','http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_PIPORAB&receiverParty=&receiverService=&interface=SI_EMPLOYEE&interfaceNamespace=https://arunbalaji.tech')
+  var req = unirest('POST','http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_BENITA_PIPO&receiverParty=&receiverService=&interface=SI_EMPLOYEE_LEAVEREQ_SB&interfaceNamespace=http://customerportalsusan.com')
   .headers({
     'Authorization' : 'Basic UE9VU0VSQDE6VGVjaEAyMDIy',
     'Content-Type' : 'text/xml'
@@ -2633,8 +2663,8 @@ app.post('/leavereq',(req,res)=>{
       let xmlParser = require('xml2json');
       rest = xmlParser.toJson(result.body);
       restJson = JSON.parse(rest);
-      result_body = restJson['SOAP:Envelope']['SOAP:Body']['ns0:ZPIPO_FM.Response']
-      if(result_body.IT_LEAVE_DETAIL === ''){
+      result_body = restJson['SOAP:Envelope']['SOAP:Body']['ns0:ZFM_EMPLOYEE_LEAVEREQ_SB.Response']
+      if(result_body.RETURN['TYPE'] === 'E'){
         console.log('Unable to fetch data');
         res.json({ success : false, message : "No records found"});
       }

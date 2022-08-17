@@ -727,7 +727,7 @@ export class NetworkService {
           console.log(response);
           this.leavereqJson = JSON.parse(JSON.stringify(response));
 
-          this.leavereqData = this.leavereqJson.data.IT_LEAVE_DETAIL.item;
+          this.leavereqData = this.leavereqJson.data.ET_RESULT.item;
           this.leavereqCount = (this.leavereqData.length);
         },
         err => {
